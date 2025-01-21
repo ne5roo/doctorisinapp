@@ -91,22 +91,11 @@ class SubscriptionPage extends StatelessWidget {
           children: [
             _buildGreenButton(
               context,
-              text: 'Login',
+              text: 'Already have an account?',
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const LoginPage()),
-                );
-              },
-            ),
-            const SizedBox(width: 20), // Space between buttons
-            _buildGreenButton(
-              context,
-              text: 'Register',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const RegistrationPage()),
                 );
               },
             ),
@@ -251,8 +240,8 @@ class SubscriptionPage extends StatelessWidget {
               Navigator.of(context).pop(); // Close the dialog
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const LoginPage()),
-              ); // Navigate to LoginPage
+                MaterialPageRoute(builder: (context) => const RegistrationPage()),
+              ); // Navigate to RegistrationPage
             },
             child: const Text('OK'),
           ),
