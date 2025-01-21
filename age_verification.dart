@@ -3,14 +3,11 @@ import 'package:flutter/material.dart';
 class AgeVerificationPage extends StatefulWidget {
   const AgeVerificationPage({super.key});
 
-
   @override
-  // ignore: library_private_types_in_public_api
   _AgeVerificationPageState createState() => _AgeVerificationPageState();
 }
 
-
-class _AgeVerificationPageState extends State<AgeVerificationPage> {
+class _AgeVerificationPageState extends State<AgeVerificationPage> { //different grades specified
   final List<String> _grades = [
     'Kindergarten',
     'Grade 1',
@@ -27,18 +24,29 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
     'Grade 12',
   ];
 
+  final List<String> _genders = ['Male', 'Female', 'Other']; //Try to add visual if needed?
+  final List<String> _feelings = ['Happy', 'Sad', 'Sick', 'Angry', 'Nervous', 'Scared', 'Not Sure']; //Make this into emojis(?)
 
   String? _selectedGrade;
-
-
+  String? _selectedGender;
+  String? _selectedFeeling;
   String _errorMessage = '';
 
-
-  // Function to check if the grade is selected and valid
-  bool _isValidGrade() {
+  // Function to check if all fields are selected and valid (edit so that error messages appear on the appropriate questions; please select grade error on all 3 questions as of the moment)
+  bool _isValidForm() {
     if (_selectedGrade == null) {
       setState(() {
         _errorMessage = 'Please select your grade.';
+      });
+      return false;
+    } else if (_selectedGender == null) {
+      setState(() {
+        _errorMessage = 'Please select your gender.';
+      });
+      return false;
+    } else if (_selectedFeeling == null) {
+      setState(() {
+        _errorMessage = 'Please select how you are feeling.';
       });
       return false;
     } else {
@@ -49,36 +57,33 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
     }
   }
 
-
   // Function to handle submission
   void _submit() {
-    if (_isValidGrade()) {
-      // If grade is selected, proceed to next screen ( CONNECT THIS PAGE TO Main App Screen)
-      Navigator.pushReplacementNamed(context, '/home');  // Adjust route as needed
+    if (_isValidForm()) {
+      // If all fields are selected, proceed to the next screen
+      Navigator.pushReplacementNamed(context, '/main_page'); // Ensure to redirect to main page is defined in routes if valid info submitted
     } else {
-      // Show error message if grade is not selected
+      // Show error message if any field is not selected
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(_errorMessage)),
       );
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Grade Verification')),
+      appBar: AppBar(title: const Text('Age Verification')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: ListView(
           children: [
             const Text(
               'Please select your grade: ',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),  // Consistent adequate spacing between sections
             DropdownButtonFormField<String>(
               value: _selectedGrade,
               onChanged: (String? newValue) {
@@ -99,7 +104,61 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
                 errorText: _errorMessage.isEmpty ? null : _errorMessage,
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),  // Increase spacing after grade selection
+            const Text(
+              'Please select your gender: ',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 20),  // Consistent adequate spacing before gender dropdown
+            DropdownButtonFormField<String>(
+              value: _selectedGender,
+              onChanged: (String? newValue) {
+                setState(() {
+                  _selectedGender = newValue;
+                });
+              },
+              items: _genders.map<DropdownMenuItem<String>>((String gender) {
+                return DropdownMenuItem<String>(
+                  value: gender,
+                  child: Text(gender),
+                );
+              }).toList(),
+              decoration: InputDecoration(
+                labelText: 'Select Gender',
+                hintText: 'Choose your gender',
+                border: const OutlineInputBorder(),
+                errorText: _errorMessage.isEmpty ? null : _errorMessage,
+              ),
+            ),
+            const SizedBox(height: 30),  // Increase spacing after gender selection
+            const Text(
+              'How are you feeling? ',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 20),  // Consistent adequate spacing before feelings dropdown
+            DropdownButtonFormField<String>(
+              value: _selectedFeeling,
+              onChanged: (String? newValue) {
+                setState(() {
+                  _selectedFeeling = newValue;
+                });
+              },
+              items: _feelings.map<DropdownMenuItem<String>>((String feeling) {
+                return DropdownMenuItem<String>(
+                  value: feeling,
+                  child: Text(feeling),
+                );
+              }).toList(),
+              decoration: InputDecoration(
+                labelText: 'Select Feeling',
+                hintText: 'How are you feeling?',
+                border: const OutlineInputBorder(),
+                errorText: _errorMessage.isEmpty ? null : _errorMessage,
+              ),
+            ),
+            const SizedBox(height: 40),  // Adequate spacing before the submit button
             ElevatedButton(
               onPressed: _submit,
               child: const Text('Submit'),
