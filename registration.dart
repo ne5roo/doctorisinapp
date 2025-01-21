@@ -32,8 +32,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 231, 208, 165), // Set AppBar color to light brown
         title: const Text('Register'),
       ),
+      backgroundColor: const Color(0xFFFEE4B3), // Light brown background color
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
