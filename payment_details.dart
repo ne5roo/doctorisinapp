@@ -1,3 +1,4 @@
+import 'package:doctorisinapp/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -10,7 +11,7 @@ class PaymentFormPage extends StatefulWidget {
 
 class _PaymentFormPageState extends State<PaymentFormPage> {
   final List<String> _countries = [
-     'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola',
+    'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola',
     'Argentina', 'Armenia', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain',
     'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bhutan', 'Bolivia',
     'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso',
@@ -37,8 +38,8 @@ class _PaymentFormPageState extends State<PaymentFormPage> {
     'Togo', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Tuvalu', 'Uganda',
     'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'Uzbekistan',
     'Vanuatu', 'Venezuela', 'Vietnam', 'Yemen', 'Zambia', 'Zimbabwe'
-    // Add all other countries here
   ];
+
   String? _selectedCountry;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
@@ -50,10 +51,14 @@ class _PaymentFormPageState extends State<PaymentFormPage> {
 
   void _submitPayment() {
     if (_formKey.currentState!.validate()) {
-      // Proceed with payment submission logic
+      // Simulate a payment submission and navigate back to the main screen.
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Payment Submitted!')),
+        const SnackBar(content: Text('Payment Submitted Successfully!')),
       );
+      Navigator.pop(context); // Redirect back to the previous screen.
+      context;
+      MaterialPageRoute(builder: (context) => MainPage());
+      
     }
   }
 
@@ -108,19 +113,20 @@ class _PaymentFormPageState extends State<PaymentFormPage> {
                 decoration: const InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder(),
-                ),
-                validator: (value) {
-                  // Regular expression for validating an email
-                  final emailRegex = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
-                  }
-                  if (!emailRegex.hasMatch(value)) {
-                    return 'Please enter a valid email address';
-                  }
-                  return null;
-                },
-              ),
+                  ),
+                  validator: (value) {
+    // Improved regular expression for email validation
+    final emailRegex = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$');
+    if (value == null || value.isEmpty) {
+      return 'Please enter your email';
+    }
+    if (!emailRegex.hasMatch(value)) {
+      return 'Please enter a valid email address';
+    }
+    return null;
+  },
+),
+
               const SizedBox(height: 20),
               Row(
                 children: [
@@ -174,22 +180,22 @@ class _PaymentFormPageState extends State<PaymentFormPage> {
               TextFormField(
                 controller: _creditCardController,
                 decoration: const InputDecoration(
-                  labelText: 'Credit/Mastercard/Visa number',
+                  labelText: 'Credit Card Number',
                   border: OutlineInputBorder(),
                 ),
-                keyboardType: TextInputType.number,
-                inputFormatters: [
-                  FilteringTextInputFormatter.digitsOnly,
-                  LengthLimitingTextInputFormatter(16),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(16),
                 ],
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your credit card number';
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your credit card number';
                   }
-                  if (value.length != 16) {
-                    return 'Credit card number must be 16 digits';
+                    if (value.length != 16) {
+                      return 'Credit card number must be 16 digits';
                   }
-                  return null;
+                      return null;
                 },
               ),
               const SizedBox(height: 20),
@@ -223,7 +229,7 @@ class _PaymentFormPageState extends State<PaymentFormPage> {
                       obscureText: true,
                       inputFormatters: [
                         FilteringTextInputFormatter.digitsOnly,
-                        LengthLimitingTextInputFormatter(3), // Limit CVV to 3 digits
+                        LengthLimitingTextInputFormatter(3),
                       ],
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -249,7 +255,7 @@ class _PaymentFormPageState extends State<PaymentFormPage> {
                   'CONFIRM PAYMENT',
                   style: TextStyle(
                     fontSize: 16,
-                    color: Color.fromARGB(255, 101, 67, 33), // Dark brown color
+                    color: Color.fromARGB(255, 101, 67, 33),
                   ),
                 ),
               ),
