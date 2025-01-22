@@ -3,6 +3,8 @@ import 'package:flutter/material.dart'; //integrate to other pages (Need to)
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) { //Remember to add designs
     return MaterialApp(
@@ -22,6 +24,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MainPage extends StatelessWidget {
+  const MainPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,6 +112,8 @@ class MainPage extends StatelessWidget {
 
 // Chat Page
 class ChatPage extends StatefulWidget {
+  const ChatPage({super.key});
+
   @override
   _ChatPageState createState() => _ChatPageState();
 }
@@ -182,7 +188,9 @@ class _ChatPageState extends State<ChatPage> {
 }
 
 // Profile Page
-class ProfilePage extends StatelessWidget { //add customization of an icon example could be kahoot characters, add various of expressions also if possible
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
+ //add customization of an icon example could be kahoot characters, add various of expressions also if possible
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -222,6 +230,8 @@ class ProfilePage extends StatelessWidget { //add customization of an icon examp
 
 // Settings Page
 class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -235,6 +245,8 @@ class SettingsPage extends StatelessWidget {
 
 // More Information Page
 class InfoPage extends StatelessWidget {
+  const InfoPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
