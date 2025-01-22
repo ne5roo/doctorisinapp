@@ -33,7 +33,6 @@ class PaymentFormPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            // Name Input Field
             TextField(
               decoration: InputDecoration(
                 labelText: 'Name',
@@ -41,7 +40,6 @@ class PaymentFormPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            // Email Input Field
             TextField(
               decoration: InputDecoration(
                 labelText: 'Email',
@@ -49,7 +47,6 @@ class PaymentFormPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            // Country and Postal Code
             Row(
               children: [
                 Expanded(
@@ -72,7 +69,6 @@ class PaymentFormPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 20),
-            // Credit Card Number
             TextField(
               decoration: InputDecoration(
                 labelText: 'Credit/Mastercard/Visa number',
@@ -81,7 +77,6 @@ class PaymentFormPage extends StatelessWidget {
               keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 20),
-            // Expiry Date and CVV
             Row(
               children: [
                 Expanded(
@@ -113,7 +108,6 @@ class PaymentFormPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
               onPressed: () {
-                // Handle payment submission logic here
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Payment Submitted!')),
                 );
@@ -129,10 +123,3 @@ class PaymentFormPage extends StatelessWidget {
     );
   }
 }
-
-void main() {
-  runApp(const MaterialApp(
-    home: PaymentFormPage(),
-  ));
-}
-
