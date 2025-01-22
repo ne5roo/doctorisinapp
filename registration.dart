@@ -67,6 +67,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   if (value == null || value.isEmpty) {
                     return 'Please enter an email';
                   }
+                  // Regular expression for validating email
+                  final emailRegex = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$');
+                  if (!emailRegex.hasMatch(value)) {
+                    return 'Please enter a valid email address';
+                  }
                   return null;
                 },
               ),
