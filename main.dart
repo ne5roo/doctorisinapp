@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'login.dart'; // Import the LoginPage
 import 'subscription_page.dart'; // Import the SubscriptionPage
 import 'age_verification.dart'; // Import the AgeVerificationPage
+import 'registration.dart'; // Import the RegistrationPage
+import 'payment_details.dart'; // Import the PaymentFormPage
 
 void main() {
   runApp(const MyApp());
@@ -17,12 +19,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // Set SubscriptionPage as the initial screen (home)
-      home: const SplashScreen(),
+      home: const SplashScreen(), // Initial splash or subscription page
       routes: {
-        '/ageVerification': (context) => const AgeVerificationPage(), // Route to AgeVerificationPage
-        '/home': (context) => const HomePage(), // After age verification or successful login
-        '/login': (context) => const LoginPage(), // Route to LoginPage
+        '/ageVerification': (context) => const AgeVerificationPage(), // Age Verification
+        '/home': (context) => const HomePage(), // Home Page after verification/login
+        '/login': (context) => const LoginPage(), // Login Page
+        '/register': (context) => const RegistrationPage(), // Registration Page
+        '/payment': (context) => const PaymentFormPage(), // Payment Form Page
       },
     );
   }
