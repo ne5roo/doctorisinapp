@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'main_page.dart'; // Import MainPage
 
 class PaymentFormPage extends StatefulWidget {
   const PaymentFormPage({super.key});
@@ -34,7 +35,12 @@ class _PaymentFormPageState extends State<PaymentFormPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Payment Submitted Successfully!')),
       );
-      Navigator.pop(context);
+
+      // Navigate to MainPage after payment confirmation
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const MainPage()),
+      );
     }
   }
 
