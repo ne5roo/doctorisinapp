@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'payment_details.dart'; // Import the PaymentFormPage
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({super.key});
@@ -20,6 +21,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
       if (_agreeToTerms) {
         // Perform registration logic
         print('Registration successful');
+        // Navigate to PaymentFormPage
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const PaymentFormPage()),
+        );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('You must agree to the terms of service')),
