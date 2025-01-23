@@ -151,7 +151,7 @@ class _PaymentFormPageState extends State<PaymentFormPage> {
                               child: TextFormField(
                                 controller: _postalCodeController,
                                 decoration: const InputDecoration(
-                                  labelText: 'Postal Code',
+                                  labelText: 'Zipcode',
                                   border: OutlineInputBorder(),
                                 ),
                                 validator: (value) {
