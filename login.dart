@@ -5,7 +5,6 @@ class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _LoginPageState createState() => _LoginPageState();
 }
 
@@ -27,11 +26,31 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  void _forgotPassword() {
+    // Handle the "Forgot Your Password?" logic here
+    // For example, navigate to a password reset page or display a dialog
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Forgot Password'),
+        content: const Text('Password reset link has been sent to your email.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFFEE4B3),  // Light brown background color
       appBar: AppBar(
         title: const Text('Login'),
+        backgroundColor: const Color.fromARGB(255, 231, 208, 165),  // Dark brown color for AppBar
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -46,6 +65,11 @@ class _LoginPageState extends State<LoginPage> {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter an email';
+                  }
+                  // Regular expression for validating email
+                  final emailRegex = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$');
+                  if (!emailRegex.hasMatch(value)) {
+                    return 'Please enter a valid email address';
                   }
                   return null;
                 },
@@ -64,8 +88,13 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: _login,  // Trigger login method
+                onPressed: _login, // Trigger login method
                 child: const Text('Login'),
+              ),
+              const SizedBox(height: 20),
+              TextButton(
+                onPressed: _forgotPassword, // Trigger forgot password method
+                child: const Text('Forgot Your Password?'), // Will send a password reset link to the user's email
               ),
             ],
           ),
