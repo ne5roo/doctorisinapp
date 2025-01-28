@@ -89,12 +89,18 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _login, // Trigger login method
-                child: const Text('Login'),
+                child: const Text(
+                  'Login',
+                  style: TextStyle(color: Colors.black), // Set text color to black
+                ),
               ),
               const SizedBox(height: 20),
               TextButton(
                 onPressed: _forgotPassword, // Trigger forgot password method
-                child: const Text('Forgot Your Password?'), // Will send a password reset link to the user's email
+                child: const Text(
+                  'Forgot Your Password?',
+                  style: TextStyle(color: Color.fromARGB(255, 155, 154, 154)), // Set text color to black // Will send a password reset link to the user's email
+                ),
               ),
             ],
           ),
