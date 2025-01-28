@@ -222,9 +222,12 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
             ElevatedButton(
               onPressed: _submit,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFFEE4B3), // Set button background color same as the page
+                backgroundColor: const Color.fromARGB(255, 231, 208, 165), // Set button background color same as the page
               ),
-              child: const Text('Submit'),
+              child: const Text(
+                'Submit',
+                style: TextStyle(color: Colors.black), // Set text color to black
+              ),
             ),
           ],
         ),
