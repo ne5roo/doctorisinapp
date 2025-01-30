@@ -53,40 +53,25 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
   bool _isValidForm() {
     bool isValid = true;
 
-    // Check if a grade is selected, if not, show an error message
     if (_selectedGrade == null) {
-      setState(() {
-        _gradeErrorMessage = 'Please select your grade.';
-      });
+      setState(() => _gradeErrorMessage = 'Please select your grade.');
       isValid = false;
     } else {
-      setState(() {
-        _gradeErrorMessage = null;
-      });
+      setState(() => _gradeErrorMessage = null);
     }
 
-    // Check if a gender is selected, if not, show an error message
     if (_selectedGender == null) {
-      setState(() {
-        _genderErrorMessage = 'Please select your gender.';
-      });
+      setState(() => _genderErrorMessage = 'Please select your gender.');
       isValid = false;
     } else {
-      setState(() {
-        _genderErrorMessage = null;
-      });
+      setState(() => _genderErrorMessage = null);
     }
 
-    // Check if a feeling is selected, if not, show an error message
     if (_selectedFeeling == null) {
-      setState(() {
-        _feelingErrorMessage = 'Please select how you are feeling.';
-      });
+      setState(() => _feelingErrorMessage = 'Please select how you are feeling.');
       isValid = false;
     } else {
-      setState(() {
-        _feelingErrorMessage = null;
-      });
+      setState(() => _feelingErrorMessage = null);
     }
 
     return isValid;
@@ -94,13 +79,11 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
 
   // Function to handle form submission
   void _submit() {
-    // If the form is valid, navigate to the next screen
     if (_isValidForm()) {
       Navigator.pushReplacementNamed(context, '/main_page');
     } else {
-      // If the form is not valid, show an error message using a Snackbar
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please fill in all fields')),
+        const SnackBar(content: Text('Please fill in all fields')),
       );
     }
   }
@@ -108,26 +91,31 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Set the AppBar title
       appBar: AppBar(title: const Text('Age Verification')),
-
-      // Set the background color for the entire page (soft yellow color)
       backgroundColor: const Color(0xFFFEE4B3),
 
-      // Main body of the page wrapped in a Padding widget for spacing
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            // Text prompt for selecting grade
+            // Display GIF instead of Lottie animation
+            Center(
+              child: Image.asset(
+                'assets/animation/Animation - 1737674553839.gif',  // Replace with GIF path
+                width: 200,
+                height: 200,
+                fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(height: 20), // Space between the animation and text
+
             const Text(
               'Please select your grade: ',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18),
             ),
-            const SizedBox(height: 20), // Space between elements
+            const SizedBox(height: 20),
 
-            // Dropdown for selecting grade
             DropdownButtonFormField<String>(
               value: _selectedGrade,
               onChanged: (String? newValue) {
@@ -135,7 +123,7 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
                   _selectedGrade = newValue;
                 });
               },
-              items: _grades.map<DropdownMenuItem<String>>((String grade) {
+              items: _grades.map((String grade) {
                 return DropdownMenuItem<String>(
                   value: grade,
                   child: Text(grade),
@@ -145,20 +133,18 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
                 labelText: 'Select Grade',
                 hintText: 'Choose your grade',
                 border: const OutlineInputBorder(),
-                errorText: _gradeErrorMessage, // Show error message if any
+                errorText: _gradeErrorMessage,
               ),
             ),
-            const SizedBox(height: 30), // Space between elements
+            const SizedBox(height: 30),
 
-            // Text prompt for selecting gender
             const Text(
               'Please select your gender: ',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18),
             ),
-            const SizedBox(height: 20), // Space between elements
+            const SizedBox(height: 20),
 
-            // Dropdown for selecting gender
             DropdownButtonFormField<String>(
               value: _selectedGender,
               onChanged: (String? newValue) {
@@ -166,7 +152,7 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
                   _selectedGender = newValue;
                 });
               },
-              items: _genders.map<DropdownMenuItem<String>>((String gender) {
+              items: _genders.map((String gender) {
                 return DropdownMenuItem<String>(
                   value: gender,
                   child: Text(gender),
@@ -176,20 +162,18 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
                 labelText: 'Select Gender',
                 hintText: 'Choose your gender',
                 border: const OutlineInputBorder(),
-                errorText: _genderErrorMessage, // Show error message if any
+                errorText: _genderErrorMessage,
               ),
             ),
-            const SizedBox(height: 30), // Space between elements
+            const SizedBox(height: 30),
 
-            // Text prompt for selecting feeling
             const Text(
               'How are you feeling? ',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18),
             ),
-            const SizedBox(height: 20), // Space between elements
+            const SizedBox(height: 20),
 
-            // Dropdown for selecting feeling with emojis
             DropdownButtonFormField<String>(
               value: _selectedFeeling,
               onChanged: (String? newValue) {
@@ -197,14 +181,14 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
                   _selectedFeeling = newValue;
                 });
               },
-              items: _feelings.map<DropdownMenuItem<String>>((Map<String, String> feeling) {
+              items: _feelings.map((Map<String, String> feeling) {
                 return DropdownMenuItem<String>(
                   value: feeling['label'],
                   child: Row(
                     children: [
-                      Text(feeling['emoji']!), // Display emoji next to label
-                      const SizedBox(width: 10), // Space between emoji and text
-                      Text(feeling['label']!), // Display the feeling label
+                      Text(feeling['emoji']!),
+                      const SizedBox(width: 10),
+                      Text(feeling['label']!),
                     ],
                   ),
                 );
@@ -213,20 +197,19 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
                 labelText: 'Select Feeling',
                 hintText: 'How are you feeling?',
                 border: const OutlineInputBorder(),
-                errorText: _feelingErrorMessage, // Show error message if any
+                errorText: _feelingErrorMessage,
               ),
             ),
-            const SizedBox(height: 40), // Space before the submit button
+            const SizedBox(height: 40),
 
-            // Submit button with the same background color as the page
             ElevatedButton(
               onPressed: _submit,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 231, 208, 165), // Set button background color same as the page
+                backgroundColor: const Color.fromARGB(255, 231, 208, 165),
               ),
               child: const Text(
                 'Submit',
-                style: TextStyle(color: Colors.black), // Set text color to black
+                style: TextStyle(color: Colors.black),
               ),
             ),
           ],
