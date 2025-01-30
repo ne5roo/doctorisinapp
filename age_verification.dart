@@ -101,7 +101,7 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
             // Display GIF instead of Lottie animation
             Center(
               child: Image.asset(
-                'assets/animation/Animation - 1737674553839.gif',  // Replace with GIF path
+                'assets/Animation - 1737674553839.gif',  // Replace with GIF path
                 width: 200,
                 height: 200,
                 fit: BoxFit.cover,
