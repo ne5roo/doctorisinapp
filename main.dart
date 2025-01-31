@@ -19,11 +19,23 @@ class MyApp extends StatelessWidget {
       title: 'Doctor is in App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        // Set AppBar theme globally
+        appBarTheme: AppBarTheme(
+          backgroundColor: const Color(0xFFFEE4B3), // Custom color for AppBar
+        ),
+        // Set Scaffold background color globally
+        scaffoldBackgroundColor: const Color(0xFFFEE4B3), // Custom color for page background
+        textTheme: TextTheme(
+          bodyLarge: TextStyle(color: Colors.black),  // Corrected text theme
+          bodyMedium: TextStyle(color: Colors.black), // Corrected text theme
+          bodySmall: TextStyle(color: Colors.black),  // Corrected text theme
+        ),
       ),
       home: const SplashScreen(), // Initial splash or subscription page
       routes: {
         '/ageVerification': (context) => const AgeVerificationPage(), // Age Verification
         '/home': (context) => const HomePage(), // Home Page after verification/login
+        '/chat': (context) => const ChatInterfacePage(), // Chat Interface Page
         '/login': (context) => const LoginPage(), // Login Page
         '/register': (context) => const RegistrationPage(), // Registration Page
         '/payment': (context) => const PaymentFormPage(), // Updated Payment Form Page
