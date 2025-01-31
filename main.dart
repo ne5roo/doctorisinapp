@@ -21,10 +21,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         // Set AppBar theme globally
         appBarTheme: AppBarTheme(
-          backgroundColor: const Color(0xFFFEE4B3), // Custom color for AppBar
+          backgroundColor: const Color(0xFFFEE4B3), // Custom color for AppBar constant throughout the app
         ),
         // Set Scaffold background color globally
-        scaffoldBackgroundColor: const Color(0xFFFEE4B3), // Custom color for page background
+        scaffoldBackgroundColor: const Color(0xFFFEE4B3), // Custom color for page background constant throughout the app
         textTheme: TextTheme(
           bodyLarge: TextStyle(color: Colors.black),  // Corrected text theme
           bodyMedium: TextStyle(color: Colors.black), // Corrected text theme
