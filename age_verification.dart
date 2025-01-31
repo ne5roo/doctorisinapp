@@ -26,7 +26,7 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
   ];
 
   // List of genders to display in the dropdown
-  final List<String> _genders = ['Male', 'Female', 'Other'];
+  final List<String> _genders = ['Male', 'Female', 'Other', 'Unsure'];
 
   // List of feelings with corresponding emojis
   final List<Map<String, String>> _feelings = [
@@ -91,7 +91,11 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Age Verification')),
+      appBar: AppBar(
+        title: const Text('Age Verification'),
+        backgroundColor: const Color(0xFFFEE4B3),  // Set AppBar color same as the background
+        elevation: 0,  // Optional: To remove the shadow under the app bar
+      ),
       backgroundColor: const Color(0xFFFEE4B3),
 
       body: Padding(
@@ -124,7 +128,7 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
                 });
               },
               items: _grades.map((String grade) {
-                return DropdownMenuItem<String>(
+                return DropdownMenuItem<String>( 
                   value: grade,
                   child: Text(grade),
                 );
