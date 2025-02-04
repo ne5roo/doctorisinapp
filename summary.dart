@@ -9,6 +9,12 @@ class _FeedbackPageState extends State<FeedbackPage> {
   int _selectedRating = 0;
   final TextEditingController _commentController = TextEditingController();
 
+  @override
+  void dispose() {
+    _commentController.dispose();
+    super.dispose();
+  }
+
   void _submitFeedback() {
     if (_selectedRating == 0 || _commentController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -30,16 +36,19 @@ class _FeedbackPageState extends State<FeedbackPage> {
         backgroundColor: const Color(0xFFFEE4B3),
       ),
       backgroundColor: const Color(0xFFFEE4B3),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
               child: Image.asset(
-                'assets/feedback_image.png', // Replace with your image path
+                'assets/feedback_image.png',
                 width: 200,
                 height: 200,
+                errorBuilder: (context, error, stackTrace) {
+                  return const Icon(Icons.image_not_supported, size: 100);
+                },
               ),
             ),
             const SizedBox(height: 20),
@@ -87,10 +96,14 @@ class _FeedbackPageState extends State<FeedbackPage> {
                 onPressed: _submitFeedback,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.amberAccent,
+                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
                 child: const Text(
                   'Submit',
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: Colors.black, fontSize: 16),
                 ),
               ),
             ),
