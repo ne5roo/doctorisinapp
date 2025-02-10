@@ -1,115 +1,48 @@
 import 'package:flutter/material.dart';
 
-class FeedbackPage extends StatefulWidget {
+class ChatInterfacePage extends StatefulWidget {
+  const ChatInterfacePage({Key? key}) : super(key: key);
+
   @override
-  _FeedbackPageState createState() => _FeedbackPageState();
+  _ChatInterfacePageState createState() => _ChatInterfacePageState();
 }
 
-class _FeedbackPageState extends State<FeedbackPage> {
-  int _selectedRating = 0;
-  final TextEditingController _commentController = TextEditingController();
-
-  @override
-  void dispose() {
-    _commentController.dispose();
-    super.dispose();
-  }
-
-  void _submitFeedback() {
-    if (_selectedRating == 0 || _commentController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please provide a rating and comment.')),
-      );
-    } else {
-      // Handle feedback submission logic here
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Thank you for your feedback!')),
-      );
-    }
-  }
-
+class _ChatInterfacePageState extends State<ChatInterfacePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: const Text('Feedback'),
-        backgroundColor: const Color(0xFFFEE4B3),
+        title: const Text('The Doctor Is In Summary'),
+        backgroundColor: Colors.amber,
       ),
-      backgroundColor: const Color(0xFFFEE4B3),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Image.asset(
-                'assets/feedback_image.png',
-                width: 200,
-                height: 200,
-                errorBuilder: (context, error, stackTrace) {
-                  return const Icon(Icons.image_not_supported, size: 100);
-                },
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              'Care to share your experience in using the app?',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-            TextField(
-              controller: _commentController,
-              maxLines: 4,
-              decoration: InputDecoration(
-                hintText: 'Add comments...',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
+      body: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            color: Colors.amber[100],
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  'Advices:',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-              ),
+                SizedBox(height: 8),
+                Text('• Talk to your friend before making decisions'),
+                Text('• After the whole picture is completed, make your decision'),
+                Text('• It is important to listen first'),
+              ],
             ),
-            const SizedBox(height: 20),
-            const Text(
-              'Rate the app:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(5, (index) {
-                return IconButton(
-                  icon: Icon(
-                    index < _selectedRating ? Icons.star : Icons.star_border,
-                    color: Colors.amber,
-                    size: 32,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      _selectedRating = index + 1;
-                    });
-                  },
-                );
-              }),
-            ),
-            const SizedBox(height: 30),
-            Center(
-              child: ElevatedButton(
-                onPressed: _submitFeedback,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.amberAccent,
-                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: const Text(
-                  'Submit',
-                  style: TextStyle(color: Colors.black, fontSize: 16),
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
+}
+
+void main() {
+  runApp(const MaterialApp(
+    home: ChatInterfacePage(),
+  ));
 }
