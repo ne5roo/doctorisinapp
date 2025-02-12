@@ -5,6 +5,7 @@ import 'login.dart'; // Import the LoginPage
 import 'subscription_page.dart'; // Import the SubscriptionPage
 import 'age_verification.dart'; // Import the AgeVerificationPage
 import 'registration.dart'; // Import the RegistrationPage
+import 'chatroom.dart'; // Import the ChatInterfacePage
 
 void main() {
   runApp(const MyApp());
@@ -35,12 +36,12 @@ class MyApp extends StatelessWidget {
       routes: {
         '/ageVerification': (context) => const AgeVerificationPage(), // Age Verification
         '/home': (context) => const HomePage(), // Home Page after verification/login
-        '/chat': (context) => const ChatInterfacePage(), // Chat Interface Page
         '/login': (context) => const LoginPage(), // Login Page
         '/register': (context) => const RegistrationPage(), // Registration Page
         '/payment': (context) => const PaymentFormPage(), // Updated Payment Form Page
         '/subscription': (context) => const SubscriptionPage(), // Subscription Page
         '/main_page': (context) => MainPage(), // Main Page after login
+        '/chat': (context) => ChatInterfacePage(), // Chat Interface Page
       },
     );
   }
