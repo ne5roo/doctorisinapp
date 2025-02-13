@@ -80,73 +80,92 @@ class _ProfilePageState extends State<ProfilePage> {
           },
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            GestureDetector(
-              onTap: () {
-                _showCharacterSelectionDialog(context);
-              },
-              child: CircleAvatar(
-                radius: 60,
-                backgroundImage: AssetImage(profilePicUrl), // Use the selected image from assets
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Stack(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      if (isEditing) {
+                        _showCharacterSelectionDialog(context);
+                      }
+                    },
+                    child: CircleAvatar(
+                      radius: 60,
+                      backgroundImage: AssetImage(profilePicUrl), // Use the selected image from assets
+                    ),
+                  ),
+                  if (isEditing)
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: IconButton(
+                        icon: Icon(Icons.edit, color: Colors.blueAccent),
+                        onPressed: () {
+                          _showCharacterSelectionDialog(context);
+                        },
+                      ),
+                    ),
+                ],
               ),
-            ),
-            SizedBox(height: 16),
-            isEditing
-                ? TextField(
-                    controller: nameController,
-                    decoration: InputDecoration(labelText: 'Display Name'),
-                  )
-                : Text(
-                    name,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+              SizedBox(height: 16),
+              isEditing
+                  ? TextField(
+                      controller: nameController,
+                      decoration: InputDecoration(labelText: 'Display Name'),
+                    )
+                  : Text(
+                      name,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-            SizedBox(height: 8),
-            isEditing
-                ? TextField(
-                    controller: bioController,
-                    decoration: InputDecoration(labelText: 'Bio'),
-                  )
-                : Text(
-                    bio,
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.grey[600],
+              SizedBox(height: 8),
+              isEditing
+                  ? TextField(
+                      controller: bioController,
+                      decoration: InputDecoration(labelText: 'Bio'),
+                    )
+                  : Text(
+                      bio,
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.grey[600],
+                      ),
                     ),
-                  ),
-            SizedBox(height: 8),
-            isEditing
-                ? TextField(
-                    controller: statusController,
-                    decoration: InputDecoration(labelText: 'Status'),
-                  )
-                : Text(
-                    status,
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.grey[600],
+              SizedBox(height: 8),
+              isEditing
+                  ? TextField(
+                      controller: statusController,
+                      decoration: InputDecoration(labelText: 'Status'),
+                    )
+                  : Text(
+                      status,
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.grey[600],
+                      ),
                     ),
+              SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: toggleEditing,
+                child: Text(isEditing ? 'Cancel' : 'Edit Profile'),
+              ),
+              if (isEditing)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  child: ElevatedButton(
+                    onPressed: saveProfile,
+                    child: Text('Save Profile'),
                   ),
-            SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: toggleEditing,
-              child: Text(isEditing ? 'Cancel' : 'Edit Profile'),
-            ),
-            if (isEditing)
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: ElevatedButton(
-                  onPressed: saveProfile,
-                  child: Text('Save Profile'),
                 ),
-              ),
-          ],
+            ],
+          ),
         ),
       ),
     );
