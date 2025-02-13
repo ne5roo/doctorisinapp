@@ -1,5 +1,5 @@
-// connect with main page and add more features for usability 
 import 'package:flutter/material.dart';
+import 'main_page.dart' as mainPage; // Import MainPage
 
 void main() {
   runApp(MyApp());
@@ -10,7 +10,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(), // Initial theme is light mode
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFFFEE4B3), // Same as MainPage
+        ),
+        scaffoldBackgroundColor: Color(0xFFFEE4B3), // Same as MainPage
+      ),
       home: SettingsPage(),
     );
   }
@@ -31,84 +37,78 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Settings'),
-      ),
-      body: ListView(
-        padding: EdgeInsets.all(16),
-        children: [
-          // Notification toggle switch
-          SwitchListTile(
-            title: Text('Enable Notifications'),
-            value: _isNotificationEnabled,
-            onChanged: (bool value) {
-              setState(() {
-                _isNotificationEnabled = value;
-              });
+    return MaterialApp(
+      theme: _isDarkMode
+          ? ThemeData.dark()
+          : ThemeData(
+              primarySwatch: Colors.blue,
+              appBarTheme: const AppBarTheme(
+                backgroundColor: Color(0xFFFEE4B3), // Matches MainPage
+              ),
+              scaffoldBackgroundColor: Color(0xFFFEE4B3), // Matches MainPage
+            ),
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Settings'),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => mainPage.MainPage()),
+              ); // Navigate back to the main page
             },
           ),
-          
-          // Voice Option selection
-          ListTile(
-            title: Text('Voice Option'),
-            subtitle: Text(_selectedVoice),
-            trailing: DropdownButton<String>(
-              value: _selectedVoice,
-              onChanged: (String? newValue) {
+        ),
+        body: ListView(
+          padding: EdgeInsets.all(16),
+          children: [
+            // Notification toggle switch
+            SwitchListTile(
+              title: Text('Enable Notifications'),
+              value: _isNotificationEnabled,
+              onChanged: (bool value) {
                 setState(() {
-                  _selectedVoice = newValue!;
+                  _isNotificationEnabled = value;
                 });
               },
-              items: voiceOptions.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
             ),
-          ),
-          
-          // Dark Mode toggle switch
-          SwitchListTile(
-            title: Text('Enable Dark Mode'),
-            value: _isDarkMode,
-            onChanged: (bool value) {
-              setState(() {
-                _isDarkMode = value;
-              });
-              // Change the app theme based on the switch
-              if (_isDarkMode) {
-                // Use dark theme
-                _changeTheme(ThemeData.dark());
-              } else {
-                // Use light theme
-                _changeTheme(ThemeData.light());
-              }
-            },
-          ),
-        ],
+
+            // Voice Option selection
+            ListTile(
+              title: Text('Voice Option'),
+              subtitle: Text(_selectedVoice),
+              trailing: DropdownButton<String>(
+                value: _selectedVoice,
+                onChanged: (String? newValue) {
+                  setState(() {
+                    _selectedVoice = newValue!;
+                  });
+                },
+                items:
+                    voiceOptions.map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
+            ),
+
+            // Dark Mode toggle switch
+            SwitchListTile(
+              title: Text('Enable Dark Mode'),
+              value: _isDarkMode,
+              onChanged: (bool value) {
+                setState(() {
+                  _isDarkMode = value;
+                });
+              },
+            ),
+          ],
+        ),
       ),
-    );
-  }
-
-  // Function to change theme by rebuilding the entire app
-  void _changeTheme(ThemeData themeData) {
-    runApp(MyAppWithTheme(themeData));
-  }
-}
-
-class MyAppWithTheme extends StatelessWidget {
-  final ThemeData themeData;
-
-  MyAppWithTheme(this.themeData);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: themeData, // Apply the provided theme (light or dark)
-      home: SettingsPage(),
     );
   }
 }
