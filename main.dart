@@ -6,6 +6,8 @@ import 'subscription_page.dart'; // Import the SubscriptionPage
 import 'age_verification.dart'; // Import the AgeVerificationPage
 import 'registration.dart'; // Import the RegistrationPage
 import 'chatroom.dart'; // Import the ChatInterfacePage
+import 'help_page.dart'; // Import the HelpPage
+import 'settings_page.dart'; // Import the SettingsPage
 
 void main() {
   runApp(const MyApp());
@@ -42,6 +44,8 @@ class MyApp extends StatelessWidget {
         '/subscription': (context) => const SubscriptionPage(), // Subscription Page
         '/main_page': (context) => MainPage(), // Main Page after login
         '/chat': (context) => ChatInterfacePage(), // Chat Interface Page
+        '/help': (context) => const HelpPage(), // Help Page
+        '/settings': (context) => SettingsPage(), // Settings Page
       },
     );
   }
