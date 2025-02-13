@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'chatroom.dart'; // Import the ChatInterfacePage
+import 'help_page.dart'; // Import the HelpPage
+import 'settings_page.dart'; // Import the SettingsPage
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
       home: const MainPage(),
       routes: {
         '/profile': (context) => const ProfilePage(),
-        '/settings': (context) => const SettingsPage(),
+        '/settings': (context) => SettingsPage(),
         '/help': (context) => const HelpPage(),
         '/chat': (context) => const ChatInterfacePage(), // Add the chat route
       },
@@ -138,74 +140,6 @@ class ProfilePage extends StatelessWidget {
               },
               child: const Text('Save Profile'),
             ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class SettingsPage extends StatefulWidget {
-  const SettingsPage({super.key});
-
-  @override
-  _SettingsPageState createState() => _SettingsPageState();
-}
-
-class _SettingsPageState extends State<SettingsPage> {
-  bool isDarkMode = false;
-  bool notificationsEnabled = true;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Settings')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            ListTile(
-              title: const Text('Dark Mode'),
-              trailing: Switch(
-                value: isDarkMode,
-                onChanged: (value) {
-                  setState(() {
-                    isDarkMode = value;
-                  });
-                },
-              ),
-            ),
-            ListTile(
-              title: const Text('Notifications'),
-              trailing: Switch(
-                value: notificationsEnabled,
-                onChanged: (value) {
-                  setState(() {
-                    notificationsEnabled = value;
-                  });
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class HelpPage extends StatelessWidget {
-  const HelpPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Help')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: const [
-            Text("How to use the app or FAQs about the app"),
-            // Add other help content here
           ],
         ),
       ),
