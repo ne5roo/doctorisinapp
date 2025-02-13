@@ -1,3 +1,4 @@
+import 'package:doctorisinapp/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'chatroom.dart'; // Import the ChatInterfacePage
 import 'help_page.dart'; // Import the HelpPage
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       ),
       home: const MainPage(),
       routes: {
-        '/profile': (context) => const ProfilePage(),
+        '/profile': (context) => ProfilePage(),
         '/settings': (context) => SettingsPage(),
         '/help': (context) => const HelpPage(),
         '/chat': (context) => const ChatInterfacePage(), // Add the chat route
@@ -103,46 +104,6 @@ class MainPage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: const CustomBottomNavBar(),
-    );
-  }
-}
-
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Customize Profile')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            const TextField(
-              decoration: InputDecoration(
-                labelText: 'How would you like to be called?',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 20),
-            const TextField(
-              decoration: InputDecoration(
-                labelText: 'Enter your status. How are you today?',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Profile updated')),
-                );
-              },
-              child: const Text('Save Profile'),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
