@@ -1,206 +1,113 @@
-import 'package:flutter/material.dart'; //connect to main page and polish more to centralize the profile circle
+import 'package:doctorisinapp/profile_page.dart';
+import 'package:flutter/material.dart';
+import 'chatroom.dart'; // Import the ChatInterfacePage
+import 'help_page.dart'; // Import the HelpPage
+import 'settings_page.dart'; // Import the SettingsPage
+import 'subscription_page.dart'; // Import the SubscriptionPage
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ProfilePage(),
+      title: 'Chat App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFFFEE4B3),
+        ),
+        scaffoldBackgroundColor: Color(0xFFFEE4B3),
+      ),
+      home: const MainPage(),
+      routes: {
+        '/profile': (context) => ProfilePage(),
+        '/settings': (context) => SettingsPage(),
+        '/help': (context) => const HelpPage(),
+        '/chat': (context) => const ChatInterfacePage(), // Add the chat route
+        '/subscription': (context) => const SubscriptionPage(), // Add the subscription route
+      },
     );
   }
 }
 
-class ProfilePage extends StatefulWidget {
+class CustomBottomNavBar extends StatelessWidget {
+  const CustomBottomNavBar({super.key});
+
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  Widget build(BuildContext context) {
+    return BottomAppBar(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          IconButton(
+            icon: const Icon(Icons.exit_to_app), // Logout Icon
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                '/subscription',
+                (Route<dynamic> route) => false,
+              ); // Redirect to subscription page and clear the navigation stack
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.settings), // Settings Icon
+            onPressed: () {
+              Navigator.pushNamed(context, '/settings');
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.info_outline), // Help Icon
+            onPressed: () {
+              Navigator.pushNamed(context, '/help');
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.person), // Profile Icon
+            onPressed: () {
+              Navigator.pushNamed(context, '/profile');
+            },
+          ),
+        ],
+      ),
+    );
+  }
 }
 
-class _ProfilePageState extends State<ProfilePage> {
-  String name = 'What would you like to be called?'; //bolded need to change this
-  String bio = 'What do you want to share about yourself?';
-  String status = 'How are you feeling today?';
-  String profilePicUrl = 'assets/images/character1.png';  // Default profile picture can add pics to asset and create a route to display on page
-
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController bioController = TextEditingController();
-  final TextEditingController statusController = TextEditingController();
-
-  bool isEditing = false;
-
-  @override
-  void initState() {
-    super.initState();
-    nameController.text = name;
-    bioController.text = bio;
-    statusController.text = status;
-  }
-
-  void toggleEditing() {
-    setState(() {
-      isEditing = !isEditing;
-    });
-  }
-
-  void saveProfile() {
-    setState(() {
-      name = nameController.text;
-      bio = bioController.text;
-      status = statusController.text;
-      isEditing = false;
-    });
-  }
-
-  // List of image assets for cartoon characters
-  final List<String> characterImages = [
-    'assets/images/character1.png',
-    'assets/images/character2.png',
-    'assets/images/character3.png',
-    // Add more characters here
-  ];
-
-  void selectProfilePic(String imagePath) {
-    setState(() {
-      profilePicUrl = imagePath; // Update the profile picture
-    });
-  }
+class MainPage extends StatelessWidget {
+  const MainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile Page"),
-        backgroundColor: Colors.blueAccent,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context); // This will pop the current screen, returning to the previous one.
-          },
-        ),
+        title: const Text('Welcome to the Doctor is in App'),
       ),
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Stack(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      if (isEditing) {
-                        _showCharacterSelectionDialog(context);
-                      }
-                    },
-                    child: CircleAvatar(
-                      radius: 60,
-                      backgroundImage: AssetImage(profilePicUrl), // Use the selected image from assets
-                    ),
-                  ),
-                  if (isEditing)
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: IconButton(
-                        icon: Icon(Icons.edit, color: Colors.blueAccent),
-                        onPressed: () {
-                          _showCharacterSelectionDialog(context);
-                        },
-                      ),
-                    ),
-                ],
-              ),
-              SizedBox(height: 16),
-              isEditing
-                  ? TextField(
-                      controller: nameController,
-                      decoration: InputDecoration(labelText: 'Display Name'),
-                    )
-                  : Text(
-                      name,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-              SizedBox(height: 8),
-              isEditing
-                  ? TextField(
-                      controller: bioController,
-                      decoration: InputDecoration(labelText: 'Bio'),
-                    )
-                  : Text(
-                      bio,
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.grey[600],
-                      ),
-                    ),
-              SizedBox(height: 8),
-              isEditing
-                  ? TextField(
-                      controller: statusController,
-                      decoration: InputDecoration(labelText: 'Status'),
-                    )
-                  : Text(
-                      status,
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.grey[600],
-                      ),
-                    ),
-              SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: toggleEditing,
-                child: Text(isEditing ? 'Cancel' : 'Edit Profile'),
-              ),
-              if (isEditing)
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: ElevatedButton(
-                    onPressed: saveProfile,
-                    child: Text('Save Profile'),
-                  ),
-                ),
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/Animation - 1738296418740.gif', //animation input can change when a better one is found
+              height: 200,
+              width: 200,
+              fit: BoxFit.cover,
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/chat'); // Redirect to chatroom
+              },
+              child: const Text('Start Chatting Here!'),
+            ),
+          ],
         ),
       ),
-    );
-  }
-
-  // Show dialog with options to select a cartoon character image
-  void _showCharacterSelectionDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Choose a Character"),
-          content: Container(
-            height: 200,
-            width: double.maxFinite,
-            child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                crossAxisSpacing: 8.0,
-                mainAxisSpacing: 8.0,
-              ),
-              itemCount: characterImages.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    selectProfilePic(characterImages[index]);
-                    Navigator.pop(context);  // Close the dialog after selection
-                  },
-                  child: Image.asset(characterImages[index]), // Display each character image
-                );
-              },
-            ),
-          ),
-        );
-      },
+      bottomNavigationBar: const CustomBottomNavBar(),
     );
   }
 }
