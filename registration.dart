@@ -121,7 +121,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _register,
-                child: const Text('Register'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFFEE4B3), // Match button color
+                  elevation: 4, // Add elevation
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    side: const BorderSide(color: Colors.black), // Add border
+                  ),
+                ),
+                child: const Text(
+                  'Register',
+                  style: TextStyle(color: Colors.black), // Set text color to black
+                ),
               ),
             ],
           ),
