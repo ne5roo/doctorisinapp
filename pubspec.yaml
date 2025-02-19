@@ -15,7 +15,7 @@ dependencies:
   flutter_typeahead: ^5.2.0
   flutter_keyboard_visibility: ^6.0.0
   flutter_lints: ^5.0.0
-  
+  lottie: ^1.2.1 # Add Lottie dependency
 
 dev_dependencies:
   flutter_test:
@@ -39,3 +39,6 @@ flutter:
     - assets/ekids1.png
     - assets/Animation - 1737674553839.gif
     - assets/Animation - 1738296418740.gif
+    - assets/login.png
+    - assets/Chatting.png
+    - assets/checklist.gif 
