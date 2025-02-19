@@ -161,12 +161,16 @@ class SubscriptionPage extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFFFEE4B3), // Green color for the button
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        backgroundColor: const Color(0xFFFEE4B3), // Match button color
+        elevation: 4, // Add elevation
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+          side: const BorderSide(color: Colors.black), // Add border
+        ),
       ),
       child: Text(
         text,
-        style: const TextStyle(color: Colors.black),
+        style: const TextStyle(color: Colors.black), // Set text color to black
       ),
     );
   }
