@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart'; //connect to main page and polish more to centralize the profile circle
+import 'package:flutter/material.dart';
+import 'main_page.dart'; // Import MainPage
 
 void main() {
   runApp(MyApp());
@@ -9,6 +10,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: ProfilePage(),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFFFEE4B3), // Consistent AppBar color
+        ),
+        scaffoldBackgroundColor: Color(0xFFFEE4B3), // Same as MainPage
+      ),
     );
   }
 }
@@ -72,11 +80,14 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Profile Page"),
-        backgroundColor: Color.fromARGB(255, 231, 208, 165),
+        backgroundColor: Color(0xFFFEE4B3), // Consistent AppBar color
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context); // This will pop the current screen, returning to the previous one.
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => MainPage()),
+            ); // Redirect to main page
           },
         ),
       ),
