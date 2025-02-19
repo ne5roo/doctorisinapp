@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'main_page.dart'; // Import MainPage
 
 void main() {
   runApp(MyApp());
@@ -11,6 +12,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Help Page',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFFFEE4B3), // Consistent AppBar color
+        ),
       ),
       home: HelpPage(), // Directly displaying the HelpPage
     );
@@ -26,7 +30,10 @@ class HelpPage extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),  // Can change this icon
           onPressed: () {
-            Navigator.pop(context); // Close the page (go back to previous page); connect to main page 
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => MainPage()),
+            ); // Redirect to main page
           },
         ),
       ),
