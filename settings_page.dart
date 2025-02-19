@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'main_page.dart' as mainPage; // Import MainPage
+import 'main_page.dart'; // Import MainPage
 
 void main() {
   runApp(MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFFFEE4B3), // Same as MainPage
+          backgroundColor: Color(0xFFFEE4B3), // Consistent AppBar color
         ),
         scaffoldBackgroundColor: Color(0xFFFEE4B3), // Same as MainPage
       ),
@@ -43,7 +43,7 @@ class _SettingsPageState extends State<SettingsPage> {
           : ThemeData(
               primarySwatch: Colors.blue,
               appBarTheme: const AppBarTheme(
-                backgroundColor: Color(0xFFFEE4B3), // Matches MainPage
+                backgroundColor: Color(0xFFFEE4B3), // Consistent AppBar color
               ),
               scaffoldBackgroundColor: Color(0xFFFEE4B3), // Matches MainPage
             ),
@@ -56,8 +56,8 @@ class _SettingsPageState extends State<SettingsPage> {
             onPressed: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => mainPage.MainPage()),
-              ); // Navigate back to the main page
+                MaterialPageRoute(builder: (context) => MainPage()),
+              ); // Redirect to main page
             },
           ),
         ),
