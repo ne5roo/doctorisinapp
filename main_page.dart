@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'chatroom.dart'; // Import the ChatInterfacePage
 import 'help_page.dart'; // Import the HelpPage
 import 'settings_page.dart'; // Import the SettingsPage
-import 'subscription_page.dart'; // Import the SubscriptionPage
+import 'login.dart'; // Import the LoginPage
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFFFEE4B3),
+          backgroundColor: Color(0xFFFEE4B3), // Consistent AppBar color
         ),
         scaffoldBackgroundColor: Color(0xFFFEE4B3),
       ),
@@ -27,9 +27,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/profile': (context) => ProfilePage(),
         '/settings': (context) => SettingsPage(),
-        '/help': (context) => const HelpPage(),
+        '/help': (context) =>  HelpPage(),
         '/chat': (context) => const ChatInterfacePage(), // Add the chat route
-        '/subscription': (context) => const SubscriptionPage(), // Add the subscription route
       },
     );
   }
@@ -47,11 +46,10 @@ class CustomBottomNavBar extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.exit_to_app), // Logout Icon
             onPressed: () {
-              Navigator.pushNamedAndRemoveUntil(
+              Navigator.pushReplacement(
                 context,
-                '/subscription',
-                (Route<dynamic> route) => false,
-              ); // Redirect to subscription page and clear the navigation stack
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+              );
             },
           ),
           IconButton(
@@ -69,7 +67,10 @@ class CustomBottomNavBar extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.person), // Profile Icon
             onPressed: () {
-              Navigator.pushNamed(context, '/profile');
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
             },
           ),
         ],
@@ -85,14 +86,14 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Welcome to the Doctor is in App'),
+        title: const Text('The Doctor is in App'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/Animation - 1738296418740.gif', //animation input can change when a better one is found
+              'assets/Chatting.png', //animation input can change when a better one is found
               height: 200,
               width: 200,
               fit: BoxFit.cover,
@@ -102,7 +103,18 @@ class MainPage extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/chat'); // Redirect to chatroom
               },
-              child: const Text('Start Chatting Here!'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFFFEE4B3), // Match button color
+                elevation: 4, // Add elevation
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: const BorderSide(color: Colors.black), // Add border
+                ),
+              ),
+              child: const Text(
+                'Start Chatting Here!',
+                style: TextStyle(color: Colors.black), // Set text color to black
+              ),
             ),
           ],
         ),
