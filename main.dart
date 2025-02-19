@@ -8,6 +8,7 @@ import 'registration.dart'; // Import the RegistrationPage
 import 'chatroom.dart'; // Import the ChatInterfacePage
 import 'help_page.dart'; // Import the HelpPage
 import 'settings_page.dart'; // Import the SettingsPage
+import 'profile_page.dart'; // Import the ProfilePage
 
 void main() {
   runApp(const MyApp());
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
         '/chat': (context) => ChatInterfacePage(), // Chat Interface Page
         '/help': (context) => const HelpPage(), // Help Page
         '/settings': (context) => SettingsPage(), // Settings Page
+        '/profile': (context) => ProfilePage(), // Profile Page
       },
     );
   }
