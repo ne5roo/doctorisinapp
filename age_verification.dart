@@ -105,7 +105,7 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
             // Display GIF instead of Lottie animation
             Center(
               child: Image.asset(
-                'assets/Animation - 1737674553839.gif',  // Replace with GIF path
+                'assets/checklist.gif',  // Replace with GIF path
                 width: 200,
                 height: 200,
                 fit: BoxFit.cover,
@@ -114,7 +114,7 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
             const SizedBox(height: 20), // Space between the animation and text
 
             const Text(
-              'Please select your grade: ',
+              'Select your grade: ',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18),
             ),
@@ -143,7 +143,7 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
             const SizedBox(height: 30),
 
             const Text(
-              'Please select your gender: ',
+              'Select your gender: ',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18),
             ),
@@ -209,11 +209,16 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
             ElevatedButton(
               onPressed: _submit,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 231, 208, 165),
+                backgroundColor: const Color(0xFFFEE4B3), // Match button color
+                elevation: 4, // Add elevation
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: const BorderSide(color: Colors.black), // Add border
+                ),
               ),
               child: const Text(
                 'Submit',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.black), // Set text color to black
               ),
             ),
           ],
