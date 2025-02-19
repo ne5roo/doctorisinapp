@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: const Color(0xFFFEE4B3),  // Light brown background color
       appBar: AppBar(
         title: const Text('Login'),
-        backgroundColor: const Color.fromARGB(255, 231, 208, 165),  // Dark brown color for AppBar
+        backgroundColor: const Color(0xFFFEE4B3),  // Consistent AppBar color
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -59,6 +59,13 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image.asset(
+                'assets/login.png', // image for login (can change if better images or gif found)
+                width: 150,
+                height: 150,
+                fit: BoxFit.fill,
+              ),
+              const SizedBox(height: 20),
               TextFormField(
                 controller: _emailController,
                 decoration: const InputDecoration(labelText: 'Email'),
@@ -89,6 +96,14 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _login, // Trigger login method
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFFEE4B3), // Match button color
+                  elevation: 4, // Add elevation
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    side: const BorderSide(color: Colors.black), // Add border
+                  ),
+                ),
                 child: const Text(
                   'Login',
                   style: TextStyle(color: Colors.black), // Set text color to black
@@ -99,7 +114,10 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: _forgotPassword, // Trigger forgot password method
                 child: const Text(
                   'Forgot Your Password?',
-                  style: TextStyle(color: Color.fromARGB(255, 155, 154, 154)), // Set text color to black // Will send a password reset link to the user's email
+                  style: TextStyle(
+                    color: Colors.black, // Set text color to black
+                    decoration: TextDecoration.underline, // Underline the text
+                  ),
                 ),
               ),
             ],
