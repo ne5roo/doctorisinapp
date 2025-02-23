@@ -11,16 +11,16 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: const Color(0xFFFEE4B3),  // Applying your custom color here
       appBar: AppBar(
         title: const Text('The Doctor Is In Summary'),
-        backgroundColor: Colors.amber,
+        backgroundColor: const Color(0xFFFEE4B3),  // Applying your custom color to the AppBar
       ),
       body: Column(
         children: [
           Container(
             padding: const EdgeInsets.all(16.0),
-            color: Colors.amber[100],
+            color: const Color(0xFFFEE4B3).withOpacity(0.3),  // Lighter shade for container
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
