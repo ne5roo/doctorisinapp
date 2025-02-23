@@ -26,7 +26,6 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
       });
       _isTyping = true;
 
-      // Simulate a typing delay for the doctor
       Future.delayed(const Duration(seconds: 2), () {
         setState(() {
           _messages.add({
@@ -42,7 +41,6 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
   }
 
   String _generateBotResponse(String userMessage) {
-    // Simple AI bot logic for demonstration purposes
     if (userMessage.contains('sad') || userMessage.contains('depressed')) {
       return 'I\'m sorry to hear that. It\'s important to talk to someone who can help. Have you considered speaking to a therapist?';
     } else if (userMessage.contains('headache') || userMessage.contains('pain')) {
@@ -67,8 +65,9 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('The Doctor Is In Now Chatting'),
-        backgroundColor: Colors.orangeAccent,
+        backgroundColor: const Color(0xFFFEE4B3),
       ),
+      backgroundColor: const Color(0xFFFEE4B3),
       body: Column(
         children: [
           Expanded(
@@ -124,29 +123,6 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
               },
             ),
           ),
-          if (_showEmojis)
-            SizedBox(
-              height: 250,
-              child: GridView.count(
-                crossAxisCount: 8,
-                children: [
-                  '😀', '😁', '😂', '🤣', '😃', '😄', '😅', '😆',
-                  '😉', '😊', '😋', '😎', '😍', '😘', '😗', '😙',
-                  '😚', '🙂', '🤗', '🤔', '😐', '😑', '😶', '🙄',
-                  '😏', '😣', '😥', '😮', '🤐', '😯', '😪', '😫',
-                  '😴', '😌', '😛', '😜', '😝', '🤤', '😒', '😓',
-                  '😔', '😕', '🙃', '🤑', '😲', '☹️', '🙁', '😖',
-                  '😞', '😟', '😤', '😢', '😭', '😦', '😧', '😨',
-                  '😩', '😬', '😰', '😱', '😳', '😵', '😡', '😠',
-                  '😷', '🤒', '🤕', '🤢', '🤧', '😇', '🤠', '🤡',
-                ].map((emoji) {
-                  return GestureDetector(
-                    onTap: () => _addEmojiToMessage(emoji),
-                    child: Center(child: Text(emoji, style: const TextStyle(fontSize: 24))),
-                  );
-                }).toList(),
-              ),
-            ),
           const Divider(height: 1),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -169,10 +145,20 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
                   ),
                 ),
                 const SizedBox(width: 8),
-                IconButton(
+                ElevatedButton(
                   onPressed: _sendMessage,
-                  icon: const Icon(Icons.send),
-                  color: Colors.blue,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFFFEE4B3),
+                    elevation: 4,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      side: const BorderSide(color: Colors.black),
+                    ),
+                  ),
+                  child: const Text(
+                    'Send',
+                    style: TextStyle(color: Colors.black),
+                  ),
                 ),
               ],
             ),
