@@ -8,9 +8,18 @@ import 'registration.dart'; // Import the RegistrationPage
 import 'chatroom.dart'; // Import the ChatInterfacePage
 import 'help_page.dart'; // Import the HelpPage
 import 'settings_page.dart'; // Import the SettingsPage
+import 'package:provider/provider.dart';
+import 'providers/profile_image_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ProfileImageProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -34,6 +43,7 @@ class MyApp extends StatelessWidget {
           bodySmall: TextStyle(color: Colors.black),  // Corrected text theme
         ),
       ),
+      
       home: const SplashScreen(), // Initial splash or subscription page
       routes: {
         '/ageVerification': (context) => const AgeVerificationPage(), // Age Verification
@@ -46,6 +56,7 @@ class MyApp extends StatelessWidget {
         '/chat': (context) => ChatInterfacePage(), // Chat Interface Page
         '/help': (context) => HelpPage(), // Help Page
         '/settings': (context) => SettingsPage(), // Settings Page
+        
       },
     );
   }
