@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'summary.dart';
+import 'providers/profile_image_provider.dart';
 
 class ChatInterfacePage extends StatefulWidget {
   const ChatInterfacePage({Key? key}) : super(key: key);
@@ -56,16 +59,26 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
     });
   }
 
-  void _addEmojiToMessage(String emoji) {
-    _controller.text += emoji;
-  }
-
   @override
   Widget build(BuildContext context) {
+    final profileImageUrl = Provider.of<ProfileImageProvider>(context).profileImageUrl;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('The Doctor Is In Now Chatting'),
         backgroundColor: const Color(0xFFFEE4B3),
+        automaticallyImplyLeading: false, // Remove the back button
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.exit_to_app),
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const SummaryPage()),
+              );
+            },
+          ),
+        ],
       ),
       backgroundColor: const Color(0xFFFEE4B3),
       body: Column(
@@ -114,8 +127,8 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
                       ),
                     ),
                     if (isUser)
-                      const CircleAvatar(
-                        backgroundImage: AssetImage('assets/user_avatar.png'),
+                      CircleAvatar(
+                        backgroundImage: AssetImage(profileImageUrl),
                         radius: 18,
                       ),
                   ],
@@ -172,5 +185,5 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
 void main() {
   runApp(const MaterialApp(
     home: ChatInterfacePage(),
-  ));
+   ));
 }
