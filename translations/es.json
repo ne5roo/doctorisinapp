@@ -1,0 +1,16 @@
+{
+  "Already_have_an_account?": "¿Ya tienes una cuenta?",
+  "choose_package": "Elija su paquete de suscripción",
+  "bronze": "Paquete Bronce",
+  "bronze_price": "$17.50/mes",
+  "bronze_access": "- Acceso de 3 meses",
+  "silver": "Paquete Plata",
+  "silver_access": "- Acceso 6 meses",
+  "silver_price": "$35/mes",
+  "gold": "Paquete Oro",
+  "gold_access": "- Acceso de 1 año",
+  "gold_price": "$70/mes",
+  "selected_bronze_package": "Paquete seleccionado\nHa seleccionado el Paquete Bronce.\nDE ACUERDO",
+  "selected_gold_package": "Paquete seleccionado\nHa seleccionado el Paquete Oro.\nDE ACUERDO",
+  "selected_silver_package": "Paquete seleccionado\nHa seleccionado el Paquete Plata.\nDE ACUERDO"
+}
