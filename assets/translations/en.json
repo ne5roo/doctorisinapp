@@ -1,0 +1,16 @@
+{
+  "Already_have_an_account?": "Already have an account?",
+  "choose_package": "Choose Your Subscription Package",
+  "bronze": "Bronze Package",
+  "bronze_price": "$17.50/month",
+  "bronze_access": "- 3 Months Access",
+  "silver": "Silver Package",
+  "silver_access": "- 6 Months Access",
+  "silver_price": "$35/month",
+  "gold": "Gold Package",
+  "gold_access": "- 1 Year Access",
+  "gold_price": "$70/month",
+  "selected_bronze_package": "Selected Package\nYou have selected the Bronze Package.\nOK",
+  "selected_gold_package": "Selected Package\nYou have selected the Gold Package.\nOK",
+  "selected_silver_package": "Selected Package\nYou have selected the Silver Package.\nOK"
+}
