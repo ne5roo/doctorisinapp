@@ -1,26 +1,6 @@
 import 'package:flutter/material.dart';
 import 'main_page.dart'; // Import MainPage
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: ProfilePage(),
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFFFEE4B3), // Consistent AppBar color
-        ),
-        scaffoldBackgroundColor: Color(0xFFFEE4B3), // Same as MainPage
-      ),
-    );
-  }
-}
-
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -63,9 +43,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
   // List of image assets for cartoon characters
   final List<String> characterImages = [
-    'assets/images/character1.png',
-    'assets/images/character2.png',
-    'assets/images/character3.png',
+    'assets/Profile pics/Rabbit.jpeg',
+    'assets/Profile pics/Dog.jpeg',
+    'assets/Profile pics/Fox.jpeg',
     // Add more characters here
   ];
 
