@@ -1,41 +1,5 @@
 import 'package:flutter/material.dart'; // Severely Incomplete have not polished yet need to integrate after summary page
-
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Feedback App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MainPage(),
-      routes: {
-        '/feedback': (context) => FeedbackPage(),
-      },
-    );
-  }
-}
-
-class MainPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Feedback page'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/feedback');
-          },
-          child: const Text('Give Feedback'),
-        ),
-      ),
-    );
-  }
-}
+import 'main_page.dart'; // Import MainPage
 
 class FeedbackPage extends StatefulWidget {
   @override
@@ -60,13 +24,23 @@ class _FeedbackPageState extends State<FeedbackPage> {
       setState(() {
         _rating = 3.0; // Reset the rating
       });
+
+      // Navigate back to MainPage
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => MainPage()),
+        (Route<dynamic> route) => false,
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Feedback Page')),
+      appBar: AppBar(
+        title: const Text('Feedback Page'),
+        centerTitle: true, // Center the AppBar title
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -104,7 +78,8 @@ class _FeedbackPageState extends State<FeedbackPage> {
                   return IconButton(
                     icon: Icon(
                       index < _rating ? Icons.star : Icons.star_border,
-                      color: Colors.yellow,
+                      color: index < _rating ? Colors.amber[700] : Colors.amber[300],
+                      size: 30,
                     ),
                     onPressed: () {
                       setState(() {
@@ -119,7 +94,18 @@ class _FeedbackPageState extends State<FeedbackPage> {
               // Submit Button
               ElevatedButton(
                 onPressed: _submitFeedback,
-                child: const Text('Submit Feedback'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFFEE4B3), // Match button color
+                  elevation: 4, // Add elevation
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    side: const BorderSide(color: Colors.black), // Add border
+                  ),
+                ),
+                child: const Text(
+                  'Submit Feedback',
+                  style: TextStyle(color: Colors.black), // Set text color to black
+                ),
               ),
             ],
           ),
