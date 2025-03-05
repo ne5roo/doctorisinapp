@@ -59,7 +59,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                 controller: _feedbackController,
                 maxLines: 5,
                 decoration: InputDecoration(
-                  labelText: 'Put your Feed back Here....',
+                  labelText: 'Put your Feedback Here....',
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
