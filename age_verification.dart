@@ -92,11 +92,12 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Age Verification'),
-        backgroundColor: const Color(0xFFFEE4B3),  // Set AppBar color same as the background
+        title: const Text('Personal Information'),
+        centerTitle: true,  // Center the AppBar title
+        backgroundColor: const Color(0xFFD0F0C0),  // Set AppBar color same as the background
         elevation: 0,  // Optional: To remove the shadow under the app bar
       ),
-      backgroundColor: const Color(0xFFFEE4B3),
+      backgroundColor: const Color(0xFFD0F0C0),
 
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -209,7 +210,7 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
             ElevatedButton(
               onPressed: _submit,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFFEE4B3), // Match button color
+                backgroundColor: Colors.white, // Match button color
                 elevation: 4, // Add elevation
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
