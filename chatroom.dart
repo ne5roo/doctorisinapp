@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'summary.dart';
 import 'providers/profile_image_provider.dart';
+import 'api/gemini_api_service.dart'; // Import the GeminiApiService
 
 class ChatInterfacePage extends StatefulWidget {
-  const ChatInterfacePage({Key? key}) : super(key: key);
+  const ChatInterfacePage({super.key});
 
   @override
   _ChatInterfacePageState createState() => _ChatInterfacePageState();
@@ -19,7 +20,13 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
   bool _isTyping = false;
   bool _showEmojis = false;
 
-  void _sendMessage() {
+  final List<String> _emojis = [
+    '😀', '😁', '😂', '🤣', '😃', '😄', '😅', '😆', '😉', '😊', '😋', '😎', '😍', '😘', '🥰', '😗', '😙', '😚', '🙂', '🤗', '🤩', '🤔', '🤨', '😐', '😑', '😶', '🙄', '😏', '😣', '😥', '😮', '🤐', '😯', '😪', '😫', '🥱', '😴', '😌', '😛', '😜', '😝', '🤤', '😒', '😓', '😔', '😕', '🙃', '🤑', '😲', '☹️', '🙁', '😖', '😞', '😟', '😤', '😢', '😭', '😦', '😧', '😨', '😩', '🤯', '😬', '😰', '😱', '🥵', '🥶', '😳', '🤪', '😵', '😡', '😠', '🤬', '😷', '🤒', '🤕', '🤢', '🤮', '🤧', '😇', '🥳', '🥺', '🤠', '🤡', '🤥', '🤫', '🤭', '🧐', '🤓', '😈', '👿', '👹', '👺', '💀', '👻', '👽', '👾', '🤖', '🎃', '😺', '😸', '😹', '😻', '😼', '😽', '🙀', '😿', '😾'
+  ];
+
+  final GeminiApiService geminiApiService = GeminiApiService(apiKey: 'AIzaSyAUKaPSnbTLdcXcvegsD-nwACL9rtqAXWs');
+
+  Future<void> _sendMessage() async {
     if (_controller.text.trim().isEmpty) return;
 
     setState(() {
@@ -28,29 +35,19 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
         'text': _controller.text.trim(),
       });
       _isTyping = true;
-
-      Future.delayed(const Duration(seconds: 2), () {
-        setState(() {
-          _messages.add({
-            'sender': 'doctor',
-            'text': _generateBotResponse(_controller.text.trim()),
-          });
-          _isTyping = false;
-        });
-      });
     });
 
-    _controller.clear();
-  }
+    String botResponse = await geminiApiService.getResponse(_controller.text.trim());
 
-  String _generateBotResponse(String userMessage) {
-    if (userMessage.contains('sad') || userMessage.contains('depressed')) {
-      return 'I\'m sorry to hear that. It\'s important to talk to someone who can help. Have you considered speaking to a therapist?';
-    } else if (userMessage.contains('headache') || userMessage.contains('pain')) {
-      return 'I\'m sorry you\'re experiencing pain. Make sure to rest and stay hydrated. If the pain persists, please consult a doctor.';
-    } else {
-      return 'Thank you for sharing that. Let’s talk more about it.';
-    }
+      setState(() {
+        _messages.add({
+          'sender': 'doctor',
+          'text': botResponse,
+        });
+        _isTyping = false;
+      });
+
+    _controller.clear();
   }
 
   void _toggleEmojis() {
@@ -59,14 +56,22 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
     });
   }
 
+  void _addEmojiToMessage(String emoji) {
+    _controller.text += emoji;
+  }
+
   @override
   Widget build(BuildContext context) {
     final profileImageUrl = Provider.of<ProfileImageProvider>(context).profileImageUrl;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('The Doctor Is In Now Chatting'),
-        backgroundColor: const Color(0xFFFEE4B3),
+        title: Center(
+          child: const Text(
+            'The Doctor Is In',
+          ),
+        ),
+        backgroundColor: const Color(0xFFD0F0C0),
         automaticallyImplyLeading: false, // Remove the back button
         actions: [
           IconButton(
@@ -80,7 +85,7 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
           ),
         ],
       ),
-      backgroundColor: const Color(0xFFFEE4B3),
+      backgroundColor: const Color(0xFFD0F0C0),
       body: Column(
         children: [
           Expanded(
@@ -136,6 +141,25 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
               },
             ),
           ),
+          if (_showEmojis)
+            Container(
+              height: 250,
+              color: Colors.white,
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 8,
+                ),
+                itemCount: _emojis.length,
+                itemBuilder: (context, index) {
+                  return IconButton(
+                    onPressed: () {
+                      _addEmojiToMessage(_emojis[index]);
+                    },
+                    icon: Text(_emojis[index]),
+                  );
+                },
+              ),
+            ),
           const Divider(height: 1),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -161,7 +185,7 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
                 ElevatedButton(
                   onPressed: _sendMessage,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFFEE4B3),
+                    backgroundColor: Colors.white,
                     elevation: 4,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -185,5 +209,5 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
 void main() {
   runApp(const MaterialApp(
     home: ChatInterfacePage(),
-   ));
+  ));
 }
