@@ -4,25 +4,6 @@ import 'login.dart'; // Ensure correct import of LoginPage
 import 'registration.dart'; // Ensure correct import of RegistrationPage
 import 'package:loading_animation_widget/loading_animation_widget.dart'; // Import the loading animation package
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Your App',
-      theme: ThemeData(
-        primaryColor: const Color(0xFFFEE4B3), // Set the primary color of your app
-      ),
-      home: const SplashScreen(), // Set SplashScreen as the initial screen
-    );
-  }
-}
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -49,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFEE4B3), // Set a background color matching your theme
+      backgroundColor: const Color(0xFFD0F0C0), // Set a background color matching your theme
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -57,8 +38,8 @@ class _SplashScreenState extends State<SplashScreen> {
             // Image to display on splash screen with a bigger size
             Image.asset(
               'assets/ekids1.png', // Ensure your image is in the assets folder
-              height: 300, // Adjust the height to make the image bigger
-              width: 300,  // Adjust the width as well
+              height: 350, // Adjust the height to make the image bigger
+              width: 350,  // Adjust the width as well
             ),
             const SizedBox(height: 20),
             // New Loading Animation
@@ -85,7 +66,7 @@ class SubscriptionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 231, 208, 165), // Set AppBar color to light brown
+        backgroundColor: const Color(0xFFD0F0C0), // Set AppBar color to light brown
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -153,7 +134,7 @@ class SubscriptionPage extends StatelessWidget {
           ],
         ),
       ),
-      backgroundColor: const Color(0xFFFEE4B3),
+      backgroundColor: const Color(0xFFD0F0C0),
     );
   }
 
@@ -161,7 +142,7 @@ class SubscriptionPage extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFFFEE4B3), // Match button color
+        backgroundColor: Colors.white, // Change button color to white
         elevation: 4, // Add elevation
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
