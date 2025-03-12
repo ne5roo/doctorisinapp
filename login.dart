@@ -47,10 +47,11 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFEE4B3),  // Light brown background color
+      backgroundColor: const Color(0xFFD0F0C0),  // Light brown background color
       appBar: AppBar(
         title: const Text('Login'),
-        backgroundColor: const Color(0xFFFEE4B3),  // Consistent AppBar color
+        centerTitle: true,  // Center the AppBar title
+        backgroundColor: const Color(0xFFD0F0C0),  // Consistent AppBar color
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -97,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
               ElevatedButton(
                 onPressed: _login, // Trigger login method
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFEE4B3), // Match button color
+                  backgroundColor: Colors.white, // Match button color
                   elevation: 4, // Add elevation
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
