@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'main_page.dart'; // Import MainPage
+import 'providers/profile_image_provider.dart'; // Import ProfileImageProvider
 
 class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -10,7 +14,6 @@ class _ProfilePageState extends State<ProfilePage> {
   String name = 'What would you like to be called?'; //bolded need to change this
   String bio = 'What do you want to share about yourself?';
   String status = 'How are you feeling today?';
-  String profilePicUrl = 'assets/images/character1.png';  // Default profile picture can add pics to asset and create a route to display on page
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController bioController = TextEditingController();
@@ -50,9 +53,7 @@ class _ProfilePageState extends State<ProfilePage> {
   ];
 
   void selectProfilePic(String imagePath) {
-    setState(() {
-      profilePicUrl = imagePath; // Update the profile picture
-    });
+    Provider.of<ProfileImageProvider>(context, listen: false).setProfileImageUrl(imagePath);
   }
 
   @override
@@ -60,7 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Profile Page"),
-        backgroundColor: Color(0xFFFEE4B3), // Consistent AppBar color
+        backgroundColor: Color(0xFFD0F0C0), // Consistent AppBar color
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -87,7 +88,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     },
                     child: CircleAvatar(
                       radius: 60,
-                      backgroundImage: AssetImage(profilePicUrl), // Use the selected image from assets
+                      backgroundImage: AssetImage(
+                        Provider.of<ProfileImageProvider>(context).profileImageUrl,
+                      ), // Use the selected image from assets
                     ),
                   ),
                   if (isEditing)
@@ -145,14 +148,36 @@ class _ProfilePageState extends State<ProfilePage> {
               SizedBox(height: 16),
               ElevatedButton(
                 onPressed: toggleEditing,
-                child: Text(isEditing ? 'Cancel' : 'Edit Profile'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white, // Match button color
+                  elevation: 4, // Add elevation
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    side: const BorderSide(color: Colors.black), // Add border
+                  ),
+                ),
+                child: Text(
+                  isEditing ? 'Cancel' : 'Edit Profile',
+                  style: TextStyle(color: Colors.black), // Set text color to black
+                ),
               ),
               if (isEditing)
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: ElevatedButton(
                     onPressed: saveProfile,
-                    child: Text('Save Profile'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white, // Match button color
+                      elevation: 4, // Add elevation
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        side: const BorderSide(color: Colors.black), // Add border
+                      ),
+                    ),
+                    child: Text(
+                      'Save Profile',
+                      style: TextStyle(color: Colors.black), // Set text color to black
+                    ),
                   ),
                 ),
             ],
@@ -169,7 +194,7 @@ class _ProfilePageState extends State<ProfilePage> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text("Choose a Character"),
-          content: Container(
+          content: SizedBox(
             height: 200,
             width: double.maxFinite,
             child: GridView.builder(
