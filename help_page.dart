@@ -1,32 +1,15 @@
 import 'package:flutter/material.dart';
 import 'main_page.dart'; // Import MainPage
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Help Page',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFFFEE4B3), // Consistent AppBar color
-        ),
-      ),
-      home: HelpPage(), // Directly displaying the HelpPage
-    );
-  }
-}
-
 class HelpPage extends StatelessWidget {
+  const HelpPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('About Us'),
+        centerTitle: true, // Center the AppBar title
         leading: IconButton(
           icon: Icon(Icons.arrow_back),  // Can change this icon
           onPressed: () {
@@ -56,7 +39,7 @@ class HelpPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              'The Doctor is in App is an application that connects you to a health professional for any sort of health problem.',
+              'The Doctor is in App is an application that connects you to a health professional for any sort of health concern.',
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 10),
