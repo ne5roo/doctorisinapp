@@ -1,28 +1,10 @@
 import 'package:flutter/material.dart';
 import 'main_page.dart'; // Import MainPage
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFFFEE4B3), // Consistent AppBar color
-        ),
-        scaffoldBackgroundColor: Color(0xFFFEE4B3), // Same as MainPage
-      ),
-      home: SettingsPage(),
-    );
-  }
-}
 
 class SettingsPage extends StatefulWidget {
+  const SettingsPage({super.key});
+
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
@@ -43,14 +25,15 @@ class _SettingsPageState extends State<SettingsPage> {
           : ThemeData(
               primarySwatch: Colors.blue,
               appBarTheme: const AppBarTheme(
-                backgroundColor: Color(0xFFFEE4B3), // Consistent AppBar color
+                backgroundColor: Color(0xFFD0F0C0), // Consistent AppBar color
               ),
-              scaffoldBackgroundColor: Color(0xFFFEE4B3), // Matches MainPage
+              scaffoldBackgroundColor: Color(0xFFD0F0C0), // Matches MainPage
             ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Text('Settings'),
+          centerTitle: true, // Center the AppBar title
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
