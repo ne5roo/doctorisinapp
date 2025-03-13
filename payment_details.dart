@@ -47,9 +47,9 @@ class _PaymentFormPageState extends State<PaymentFormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber[100],
+      backgroundColor: Color(0xFFD0F0C0),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 231, 208, 165),
+        backgroundColor: const Color(0xFFD0F0C0),
         title: const Text('Secure Payment Form'),
         centerTitle: true,
       ),
@@ -71,8 +71,11 @@ class _PaymentFormPageState extends State<PaymentFormPage> {
                         const SizedBox(height: 30),
                         Center(
                           child: Image.asset(
-                            'assets/card_image.png',
+                            'assets/payment_secure.png',
                             height: 120,
+                            errorBuilder: (context, error, stackTrace) {
+                              return const Text('Image not found');
+                            },
                           ),
                         ),
                         const SizedBox(height: 30),
@@ -197,6 +200,10 @@ class _PaymentFormPageState extends State<PaymentFormPage> {
                                   border: OutlineInputBorder(),
                                 ),
                                 keyboardType: TextInputType.datetime,
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(4), // Allow only 4 digits
+                                  FilteringTextInputFormatter.digitsOnly, // Allow only numerical values
+                                ],
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter the expiry date';
@@ -235,8 +242,13 @@ class _PaymentFormPageState extends State<PaymentFormPage> {
                         const SizedBox(height: 30),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromARGB(255, 231, 208, 165),
+                            backgroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(vertical: 16),
+                            elevation: 4, // Add elevation
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              side: const BorderSide(color: Colors.black),
+                            ),
                           ),
                           onPressed: _submitPayment,
                           child: const Text(
