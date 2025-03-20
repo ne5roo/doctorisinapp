@@ -66,10 +66,19 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: const Text(
-            'The Doctor Is In',
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'The Doctor Is In',
+            ),
+            const SizedBox(width: 8),
+            Image.asset(
+              'assets/ekids1.png', // Move the ekids1.png asset here
+              height: 40,
+              width: 40,
+            ),
+          ],
         ),
         backgroundColor: const Color(0xFFD0F0C0),
         automaticallyImplyLeading: false, // Remove the back button
