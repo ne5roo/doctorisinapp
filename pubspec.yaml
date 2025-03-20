@@ -20,6 +20,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   provider: ^6.1.2
+  flutter_pdfview: ^1.0.4
+  url_launcher: ^6.0.20  # Add url_launcher package
 
 dev_dependencies:
   flutter_test:
@@ -50,10 +52,9 @@ flutter:
     - assets/ekids11.png
     - assets/doctor_avatar.png
     - assets/login.png
-    - assets/Profile pics/Rabbit.jpeg
     - assets/Profile pics/Dog.jpeg
     - assets/Profile pics/Fox.jpeg
-    - assets/payment_secure.png
+    - assets/Profile pics/Rabbit.jpeg
 
   fonts:
     - family: ComicSansMS
