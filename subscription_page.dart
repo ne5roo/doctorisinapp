@@ -84,7 +84,7 @@ class SubscriptionPage extends StatelessWidget {
               ),
               const SizedBox(height: 10), // Reduce the spacing here
               const Text(
-                'All rights reserved by ekidsPower-Up, Inc',
+                '© All rights reserved by ekidsPower-Up, Inc.',
                 style: TextStyle(fontStyle: FontStyle.italic, fontSize: 12),
                 textAlign: TextAlign.center,
               ),
