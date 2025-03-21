@@ -65,36 +65,51 @@ class SubscriptionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFD0F0C0), // Set AppBar color to light brown
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _buildGreenButton(
-              context,
-              text: 'Already have an account?',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            const Text(
-              'Choose Your Subscription Package',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: ListView(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              // Section 1
+              Image.asset(
+                'assets/ekids1.png', // Ensure your logo image is in the assets folder
+                height: 400,
+                width: 400,
+              ),
+              const SizedBox(height: 10), // Reduce the spacing here
+              const Text(
+                'Welcome to Doctor is In! Scroll down to choose a package that suits your needs.',
+                style: TextStyle(fontSize: 16),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 10), // Reduce the spacing here
+              const Text(
+                'All rights reserved by ekidsPower-Up, Inc',
+                style: TextStyle(fontStyle: FontStyle.italic, fontSize: 12),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 10), // Add spacing below the italic text
+              _buildGreenButton(
+                context,
+                text: 'Login',
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                  );
+                },
+              ),
+              const SizedBox(height: 250), // Add more space here
+              // Section 2
+              const Text(
+                'Choose Your Subscription Package',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, fontFamily: 'ComicSansMS'),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              ListView(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 children: [
                   _buildPackageCard(
                     context,
@@ -130,8 +145,8 @@ class SubscriptionPage extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       backgroundColor: const Color(0xFFD0F0C0),
