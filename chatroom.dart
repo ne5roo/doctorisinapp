@@ -35,6 +35,7 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
         'text': _controller.text.trim(),
       });
       _isTyping = true;
+      _showEmojis = false; // Close the emoji list
     });
 
     String botResponse = await geminiApiService.getResponse(_controller.text.trim());
