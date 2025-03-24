@@ -11,8 +11,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  String name = 'What would you like to be called?'; //bolded need to change this
-  String bio = 'What do you want to share about yourself?';
+  String name = 'What would you like to be called?'; 
+  String bio = 'Share about yourself';
   String status = 'How are you feeling today?';
 
   final TextEditingController nameController = TextEditingController();
@@ -37,9 +37,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void saveProfile() {
     setState(() {
-      name = nameController.text.isEmpty ? 'What would you like to be called?' : nameController.text;
-      bio = bioController.text.isEmpty ? 'What do you want to share about yourself?' : bioController.text;
-      status = statusController.text.isEmpty ? 'How are you feeling today?' : statusController.text;
+      name = nameController.text;
+      bio = bioController.text;
+      status = statusController.text;
       isEditing = false;
       // The updated values will now be displayed directly on the page.
     });
@@ -61,7 +61,14 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile Page"),
+        title: Text(
+          "Profile Page",
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'ComicSansMS', // Change font style to ComicSansMS
+          ),
+        ),
         centerTitle: true, // Center the AppBar title
         backgroundColor: Color(0xFFD0F0C0), // Consistent AppBar color
         leading: IconButton(
@@ -148,7 +155,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         labelText: 'Bio',
                       ),
                       onTap: () {
-                        if (bioController.text == 'What do you want to share about yourself?') {
+                        if (bioController.text == 'Share about yourself') {
                           bioController.clear();
                         }
                       },
