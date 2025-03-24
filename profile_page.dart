@@ -37,9 +37,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void saveProfile() {
     setState(() {
-      name = nameController.text;
-      bio = bioController.text;
-      status = statusController.text;
+      name = nameController.text.isEmpty ? 'What would you like to be called?' : nameController.text;
+      bio = bioController.text.isEmpty ? 'What do you want to share about yourself?' : bioController.text;
+      status = statusController.text.isEmpty ? 'How are you feeling today?' : statusController.text;
       isEditing = false;
       // The updated values will now be displayed directly on the page.
     });
@@ -112,14 +112,18 @@ class _ProfilePageState extends State<ProfilePage> {
               isEditing
                   ? TextField(
                       controller: nameController,
-                      decoration: InputDecoration(labelText: 'Display Name'),
+                      decoration: InputDecoration(
+                        labelText: 'Display Name',
+                      ),
                       onTap: () {
                         if (nameController.text == 'What would you like to be called?') {
                           nameController.clear();
                         }
                       },
+                      // Remove textAlign property to avoid centering text
                     )
                   : Row(
+                      mainAxisAlignment: MainAxisAlignment.center, // Center the row
                       children: [
                         Text(
                           "Name: ",
@@ -140,14 +144,18 @@ class _ProfilePageState extends State<ProfilePage> {
               isEditing
                   ? TextField(
                       controller: bioController,
-                      decoration: InputDecoration(labelText: 'Bio'),
+                      decoration: InputDecoration(
+                        labelText: 'Bio',
+                      ),
                       onTap: () {
                         if (bioController.text == 'What do you want to share about yourself?') {
                           bioController.clear();
                         }
                       },
+                      // Remove textAlign property to avoid centering text
                     )
                   : Row(
+                      mainAxisAlignment: MainAxisAlignment.center, // Center the row
                       children: [
                         Text(
                           "Bio: ",
@@ -160,7 +168,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           bio,
                           style: TextStyle(
                             fontSize: 18,
-                            color: Colors.grey[600],
                           ),
                         ),
                       ],
@@ -169,14 +176,18 @@ class _ProfilePageState extends State<ProfilePage> {
               isEditing
                   ? TextField(
                       controller: statusController,
-                      decoration: InputDecoration(labelText: 'Status'),
+                      decoration: InputDecoration(
+                        labelText: 'Status',
+                      ),
                       onTap: () {
                         if (statusController.text == 'How are you feeling today?') {
                           statusController.clear();
                         }
                       },
+                      // Remove textAlign property to avoid centering text
                     )
                   : Row(
+                      mainAxisAlignment: MainAxisAlignment.center, // Center the row
                       children: [
                         Text(
                           "Status: ",
@@ -189,7 +200,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           status,
                           style: TextStyle(
                             fontSize: 18,
-                            color: Colors.grey[600],
                           ),
                         ),
                       ],
