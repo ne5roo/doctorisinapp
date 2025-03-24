@@ -37,11 +37,10 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void saveProfile() {
     setState(() {
-      name = nameController.text;
-      bio = bioController.text;
-      status = statusController.text;
+      name = nameController.text.isEmpty ? 'What would you like to be called?' : nameController.text;
+      bio = bioController.text.isEmpty ? 'Share about yourself' : bioController.text;
+      status = statusController.text.isEmpty ? 'How are you feeling today?' : statusController.text;
       isEditing = false;
-      // The updated values will now be displayed directly on the page.
     });
   }
 
