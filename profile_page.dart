@@ -41,6 +41,7 @@ class _ProfilePageState extends State<ProfilePage> {
       bio = bioController.text;
       status = statusController.text;
       isEditing = false;
+      // The updated values will now be displayed directly on the page.
     });
   }
 
@@ -61,6 +62,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Profile Page"),
+        centerTitle: true, // Center the AppBar title
         backgroundColor: Color(0xFFD0F0C0), // Consistent AppBar color
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
@@ -111,39 +113,86 @@ class _ProfilePageState extends State<ProfilePage> {
                   ? TextField(
                       controller: nameController,
                       decoration: InputDecoration(labelText: 'Display Name'),
+                      onTap: () {
+                        if (nameController.text == 'What would you like to be called?') {
+                          nameController.clear();
+                        }
+                      },
                     )
-                  : Text(
-                      name,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  : Row(
+                      children: [
+                        Text(
+                          "Name: ",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          name,
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
                     ),
               SizedBox(height: 8),
               isEditing
                   ? TextField(
                       controller: bioController,
                       decoration: InputDecoration(labelText: 'Bio'),
+                      onTap: () {
+                        if (bioController.text == 'What do you want to share about yourself?') {
+                          bioController.clear();
+                        }
+                      },
                     )
-                  : Text(
-                      bio,
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.grey[600],
-                      ),
+                  : Row(
+                      children: [
+                        Text(
+                          "Bio: ",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          bio,
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                      ],
                     ),
               SizedBox(height: 8),
               isEditing
                   ? TextField(
                       controller: statusController,
                       decoration: InputDecoration(labelText: 'Status'),
+                      onTap: () {
+                        if (statusController.text == 'How are you feeling today?') {
+                          statusController.clear();
+                        }
+                      },
                     )
-                  : Text(
-                      status,
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.grey[600],
-                      ),
+                  : Row(
+                      children: [
+                        Text(
+                          "Status: ",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          status,
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                      ],
                     ),
               SizedBox(height: 16),
               ElevatedButton(
@@ -184,6 +233,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
+      bottomNavigationBar: const CustomBottomNavBar(),
     );
   }
 
