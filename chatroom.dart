@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:provider/provider.dart';
 import 'summary.dart';
 import 'providers/profile_image_provider.dart';
-import 'api/gemini_api_service.dart'; // Import the GeminiApiService
+import 'api/gemini_api_service.dart';
 
 class ChatInterfacePage extends StatefulWidget {
   const ChatInterfacePage({super.key});
@@ -21,7 +22,7 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
   bool _showEmojis = false;
 
   final List<String> _emojis = [
-    '😀', '😁', '😂', '🤣', '😃', '😄', '😅', '😆', '😉', '😊', '😋', '😎', '😍', '😘', '🥰', '😗', '😙', '😚', '🙂', '🤗', '🤩', '🤔', '🤨', '😐', '😑', '😶', '🙄', '😏', '😣', '😥', '😮', '🤐', '😯', '😪', '😫', '🥱', '😴', '😌', '😛', '😜', '😝', '🤤', '😒', '😓', '😔', '😕', '🙃', '🤑', '😲', '☹️', '🙁', '😖', '😞', '😟', '😤', '😢', '😭', '😦', '😧', '😨', '😩', '🤯', '😬', '😰', '😱', '🥵', '🥶', '😳', '🤪', '😵', '😡', '😠', '🤬', '😷', '🤒', '🤕', '🤢', '🤮', '🤧', '😇', '🥳', '🥺', '🤠', '🤡', '🤥', '🤫', '🤭', '🧐', '🤓', '😈', '👿', '👹', '👺', '💀', '👻', '👽', '👾', '🤖', '🎃', '😺', '😸', '😹', '😻', '😼', '😽', '🙀', '😿', '😾'
+     '😀', '😁', '😂', '🤣', '😃', '😄', '😅', '😆', '😉', '😊', '😋', '😎', '😍', '😘', '🥰', '😗', '😙', '😚', '🙂', '🤗', '🤩', '🤔', '🤨', '😐', '😑', '😶', '🙄', '😏', '😣', '😥', '😮', '🤐', '😯', '😪', '😫', '🥱', '😴', '😌', '😛', '😜', '😝', '🤤', '😒', '😓', '😔', '😕', '🙃', '🤑', '😲', '☹️', '🙁', '😖', '😞', '😟', '😤', '😢', '😭', '😦', '😧', '😨', '😩', '🤯', '😬', '😰', '😱', '🥵', '🥶', '😳', '🤪', '😵', '😡', '😠', '🤬', '😷', '🤒', '🤕', '🤢', '🤮', '🤧', '😇', '🥳', '🥺', '🤠', '🤡', '🤥', '🤫', '🤭', '🧐', '🤓', '😈', '👿', '👹', '👺', '💀', '👻', '👽', '👾', '🤖', '🎃', '😺', '😸', '😹', '😻', '😼', '😽', '🙀', '😿', '😾'
   ];
 
   final GeminiApiService geminiApiService = GeminiApiService(apiKey: 'AIzaSyAUKaPSnbTLdcXcvegsD-nwACL9rtqAXWs');
@@ -30,23 +31,17 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
     if (_controller.text.trim().isEmpty) return;
 
     setState(() {
-      _messages.add({
-        'sender': 'user',
-        'text': _controller.text.trim(),
-      });
+      _messages.add({'sender': 'user', 'text': _controller.text.trim()});
       _isTyping = true;
-      _showEmojis = false; // Close the emoji list
+      _showEmojis = false;
     });
 
     String botResponse = await geminiApiService.getResponse(_controller.text.trim());
 
-      setState(() {
-        _messages.add({
-          'sender': 'doctor',
-          'text': botResponse,
-        });
-        _isTyping = false;
-      });
+    setState(() {
+      _messages.add({'sender': 'doctor', 'text': botResponse});
+      _isTyping = false;
+    });
 
     _controller.clear();
   }
@@ -72,24 +67,30 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
           children: [
             const Text(
               'The Doctor Is In',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'ComicSansMS',
+              ),
             ),
             const SizedBox(width: 8),
-            Image.asset(
-              'assets/ekids1.png', // Move the ekids1.png asset here
-              height: 40,
-              width: 40,
-            ),
+            Image.asset('assets/ekids1.png', height: 55, width: 55),
           ],
         ),
         backgroundColor: const Color(0xFFD0F0C0),
-        automaticallyImplyLeading: false, // Remove the back button
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
             icon: const Icon(Icons.exit_to_app),
             onPressed: () {
+              final doctorMessages = _messages
+                  .where((message) => message['sender'] == 'doctor')
+                  .toList();
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const SummaryPage()),
+                MaterialPageRoute(
+                  builder: (context) => SummaryPage(messages: doctorMessages),
+                ),
               );
             },
           ),
@@ -108,10 +109,8 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
                     padding: EdgeInsets.symmetric(vertical: 10),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text(
-                        '...Typing',
-                        style: TextStyle(fontStyle: FontStyle.italic, color: Colors.grey),
-                      ),
+                      child: Text('...Typing',
+                          style: TextStyle(fontStyle: FontStyle.italic, color: Colors.grey)),
                     ),
                   );
                 }
@@ -136,9 +135,12 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
                         color: isUser ? Colors.blue[100] : Colors.grey[300],
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Text(
-                        message['text']!,
-                        style: const TextStyle(fontSize: 16),
+                      child: MarkdownBody(
+                        data: message['text']!,
+                        selectable: true,
+                        styleSheet: MarkdownStyleSheet(
+                          p: const TextStyle(fontSize: 16, color: Colors.black),
+                        ),
                       ),
                     ),
                     if (isUser)
@@ -156,9 +158,7 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
               height: 250,
               color: Colors.white,
               child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 8,
-                ),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 8),
                 itemCount: _emojis.length,
                 itemBuilder: (context, index) {
                   return IconButton(
@@ -202,10 +202,7 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
                       side: const BorderSide(color: Colors.black),
                     ),
                   ),
-                  child: const Text(
-                    'Send',
-                    style: TextStyle(color: Colors.black),
-                  ),
+                  child: const Text('Send', style: TextStyle(color: Colors.black)),
                 ),
               ],
             ),
@@ -214,10 +211,4 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
       ),
     );
   }
-}
-
-void main() {
-  runApp(const MaterialApp(
-    home: ChatInterfacePage(),
-  ));
 }
