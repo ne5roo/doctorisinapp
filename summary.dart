@@ -8,7 +8,9 @@ class SummaryPage extends StatelessWidget {
 
   List<String> _generateSummary(List<Map<String, String>> messages) {
     return messages
-        .where((message) => message['sender'] == 'doctor')
+        .where((message) =>
+            message['sender'] == 'doctor' &&
+            message['text'] != 'Hi! How can I help you today?') // Exclude specific message
         .map((message) => message['text']!)
         .toList();
   }
@@ -49,10 +51,20 @@ class SummaryPage extends StatelessWidget {
                       style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 8),
-                    ...summary.map((advice) => Text(
-                          '• $advice',
-                          style: const TextStyle(fontSize: 22),
-                        )),
+                    ...summary.map((advice) {
+                      final isBold = advice.startsWith('* **') && advice.endsWith('**');
+                      final cleanText = isBold
+                          ? advice.substring(2, advice.length - 2)
+                          : advice;
+
+                      return Text(
+                        '• $cleanText',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+                        ),
+                      );
+                    }),
                   ],
                 ),
               ),
