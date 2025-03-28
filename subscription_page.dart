@@ -30,7 +30,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFD0F0C0), // Set a background color matching your theme
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -50,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
             const SizedBox(height: 20),
             const Text(
               'Loading...',
-              style: TextStyle(color: Colors.black, fontSize: 20), // Text style matching your app theme
+              style: TextStyle(fontSize: 20), // Text style matching your app theme
             ),
           ],
         ),
@@ -149,7 +148,6 @@ class SubscriptionPage extends StatelessWidget {
           ),
         ),
       ),
-      backgroundColor: const Color(0xFFD0F0C0),
     );
   }
 
@@ -157,16 +155,13 @@ class SubscriptionPage extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white, // Change button color to white
         elevation: 4, // Add elevation
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
-          side: const BorderSide(color: Colors.black), // Add border
         ),
       ),
       child: Text(
         text,
-        style: const TextStyle(color: Colors.black), // Set text color to black
       ),
     );
   }
