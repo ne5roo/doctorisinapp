@@ -69,7 +69,6 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
         centerTitle: true, // Center the AppBar title
-        backgroundColor: Color(0xFFD0F0C0), // Consistent AppBar color
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
