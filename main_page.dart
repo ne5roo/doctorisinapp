@@ -56,6 +56,7 @@ class MainPage extends StatelessWidget {
           'Welcome!',
           style: TextStyle(
             fontFamily: 'ComicSansMS', // Apply the custom font
+            fontWeight: FontWeight.bold, // Make the font bold
             fontSize: 24,
           ),
         ),
