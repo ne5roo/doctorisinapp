@@ -92,7 +92,14 @@ class _AgeVerificationPageState extends State<AgeVerificationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Personal Information'),
+        title: const Text(
+          'Personal Information',
+          style: TextStyle(
+            fontFamily: 'ComicSansMS', // Set the font family
+            fontWeight: FontWeight.bold, // Set the font weight
+            fontSize: 20, // Set the font size
+          ),
+        ),
         centerTitle: true,  // Center the AppBar title
         backgroundColor: const Color(0xFFD0F0C0),  // Set AppBar color same as the background
         elevation: 0,  // Optional: To remove the shadow under the app bar
