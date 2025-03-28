@@ -50,9 +50,16 @@ class _PaymentFormPageState extends State<PaymentFormPage> {
       backgroundColor: Color(0xFFD0F0C0),
       appBar: AppBar(
         backgroundColor: const Color(0xFFD0F0C0),
-        title: const Text('Secure Payment Form'),
+        title: const Text(
+          'Secure Payment Form',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'ComicSansMS', // Specify the font family
+          ),
+        ),
         centerTitle: true,
-      ),
+      ),  // AppBar
       body: LayoutBuilder(
         builder: (context, constraints) {
           return SingleChildScrollView(
@@ -72,7 +79,8 @@ class _PaymentFormPageState extends State<PaymentFormPage> {
                         Center(
                           child: Image.asset(
                             'assets/payment_secure.png',
-                            height: 120,
+                            height: 130,
+                            width: 130,
                             errorBuilder: (context, error, stackTrace) {
                               return const Text('Image not found');
                             },
@@ -146,7 +154,7 @@ class _PaymentFormPageState extends State<PaymentFormPage> {
                                   }
                                   return null;
                                 },
-                              ),
+                              ), // DropdownButtonFormField
                             ),
                             const SizedBox(width: 16),
                             Flexible(
@@ -196,7 +204,7 @@ class _PaymentFormPageState extends State<PaymentFormPage> {
                               child: TextFormField(
                                 controller: _expiryController,
                                 decoration: const InputDecoration(
-                                  labelText: 'MM/YY',
+                                  labelText: 'MMYY',
                                   border: OutlineInputBorder(),
                                 ),
                                 keyboardType: TextInputType.datetime,
@@ -255,7 +263,7 @@ class _PaymentFormPageState extends State<PaymentFormPage> {
                             'CONFIRM PAYMENT',
                             style: TextStyle(
                               fontSize: 16,
-                              color: Color.fromARGB(255, 101, 67, 33),
+                              color: Colors.black,
                             ),
                           ),
                         ),
@@ -268,6 +276,6 @@ class _PaymentFormPageState extends State<PaymentFormPage> {
           );
         },
       ),
-    );
+    );  // Scaffold 
   }
 }
