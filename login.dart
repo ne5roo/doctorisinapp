@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'age_verification.dart'; // Ensure correct import of AgeVerificationPage
+import 'age_verification.dart';
+import 'registration.dart'; // Ensure correct import of AgeVerificationPage
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -47,11 +48,16 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFD0F0C0),  // Light brown background color
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text(
+          'Login',
+          style: TextStyle(
+            fontFamily: 'ComicSansMS', // Specify the font family
+            fontWeight: FontWeight.bold, // Make the font bold
+            fontSize: 24, // Set the font size
+          ),
+        ),
         centerTitle: true,  // Center the AppBar title
-        backgroundColor: const Color(0xFFD0F0C0),  // Consistent AppBar color
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -115,6 +121,23 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: _forgotPassword, // Trigger forgot password method
                 child: const Text(
                   'Forgot Your Password?',
+                  style: TextStyle(
+                    color: Colors.black, // Set text color to black
+                    decoration: TextDecoration.underline, // Underline the text
+                  ),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  // Handle the "Create an Account" logic here
+                  // For example, navigate to a registration page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const RegistrationPage()),
+                  );
+                },
+                child: const Text(
+                  'Create an Account',
                   style: TextStyle(
                     color: Colors.black, // Set text color to black
                     decoration: TextDecoration.underline, // Underline the text
