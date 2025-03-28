@@ -20,7 +20,6 @@ class SummaryPage extends StatelessWidget {
     final summary = _generateSummary(messages);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFD0F0C0),  // Applying your custom color here
       appBar: AppBar(
         title: const Text(
           'The Doctor Is In Summary',
@@ -32,7 +31,6 @@ class SummaryPage extends StatelessWidget {
           ), 
         ),
         centerTitle: true, // Center the AppBar title
-        backgroundColor: const Color(0xFFD0F0C0),  // Applying your custom color to the AppBar
         automaticallyImplyLeading: false, // Remove the back button
       ),
       body: Center(
@@ -42,7 +40,6 @@ class SummaryPage extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.all(16.0),
-                color: Colors.white,  // Lighter shade for container
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -77,7 +74,6 @@ class SummaryPage extends StatelessWidget {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor:Colors.white, // Match button color
                   elevation: 4, // Add elevation
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -86,7 +82,6 @@ class SummaryPage extends StatelessWidget {
                 ),
                 child: const Text(
                   'OK',
-                  style: TextStyle(color: Colors.black), // Set text color to black
                 ),
               ),
             ],
