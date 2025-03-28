@@ -77,7 +77,6 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
             Image.asset('assets/ekids1.png', height: 55, width: 55),
           ],
         ),
-        backgroundColor: const Color(0xFFD0F0C0),
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
@@ -96,7 +95,6 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
           ),
         ],
       ),
-      backgroundColor: const Color(0xFFD0F0C0),
       body: Column(
         children: [
           Expanded(
@@ -110,7 +108,7 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text('...Typing',
-                          style: TextStyle(fontStyle: FontStyle.italic, color: Colors.grey)),
+                          style: TextStyle(fontStyle: FontStyle.italic)),
                     ),
                   );
                 }
@@ -139,7 +137,7 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
                         data: message['text']!,
                         selectable: true,
                         styleSheet: MarkdownStyleSheet(
-                          p: const TextStyle(fontSize: 16, color: Colors.black),
+                          p: const TextStyle(fontSize: 16),
                         ),
                       ),
                     ),
@@ -156,7 +154,6 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
           if (_showEmojis)
             Container(
               height: 250,
-              color: Colors.white,
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 8),
                 itemCount: _emojis.length,
@@ -178,7 +175,7 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
                 IconButton(
                   onPressed: _toggleEmojis,
                   icon: const Icon(Icons.emoji_emotions_outlined),
-                  color: Colors.grey,
+
                 ),
                 Expanded(
                   child: TextField(
@@ -187,7 +184,6 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
                       hintText: 'Type in your message...',
                       border: OutlineInputBorder(),
                       filled: true,
-                      fillColor: Colors.white,
                     ),
                   ),
                 ),
@@ -195,14 +191,13 @@ class _ChatInterfacePageState extends State<ChatInterfacePage> {
                 ElevatedButton(
                   onPressed: _sendMessage,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
                     elevation: 4,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
-                      side: const BorderSide(color: Colors.black),
+                      side: const BorderSide(),
                     ),
                   ),
-                  child: const Text('Send', style: TextStyle(color: Colors.black)),
+                  child: const Text('Send'),
                 ),
               ],
             ),
