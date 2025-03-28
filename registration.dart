@@ -38,10 +38,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 231, 208, 165), // Set AppBar color to light brown
-        title: const Text('Register'),
+        title: const Text(
+          'Register',
+          style: TextStyle(
+            fontFamily: 'ComicSansMS', // Set font family
+            fontSize: 24, // Set font size
+            fontWeight: FontWeight.bold, // Set font weight
+          ),
+        ),
+        centerTitle: true, // Center the AppBar title
       ),
-      backgroundColor: const Color(0xFFFEE4B3), // Light brown background color
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -122,7 +128,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ElevatedButton(
                 onPressed: _register,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFEE4B3), // Match button color
+                  backgroundColor: Colors.white, // Match button color
                   elevation: 4, // Add elevation
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
