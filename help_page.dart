@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'main_page.dart'; // Import MainPage
+import 'main_page.dart'; // Import MainPage and CustomBottomNavBar
 import 'package:url_launcher/url_launcher.dart'; // Import url_launcher
 
 void main() {
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFFD0F0C0), // Consistent AppBar color
+          backgroundColor: Color(0xFFFEE4B3), // Consistent AppBar color
         ),
       ),
       home: HelpPage(), // Directly displaying the HelpPage
@@ -27,162 +27,96 @@ class HelpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Help and Support'), // AppBar title
+        title: const Text(
+          'Help and Support',
+          style: TextStyle(
+            fontFamily: 'ComicSansMS', // Set font to ComicSansMS
+            fontWeight: FontWeight.bold, // Make the font bold
+          ),
+        ),
+        centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),  // Can change this icon
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => MainPage()),
-            ); // Redirect to main page
+            Navigator.pop(context); // Go back to the previous page
           },
         ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView( // Allow scrolling for better usability
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
+              const Center(
                 child: Text(
                   'About Us!',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
-                    color: Colors.blueAccent,
                   ),
                 ),
               ),
-              SizedBox(height: 20),
-              Text(
+              const SizedBox(height: 20),
+              const Text(
                 'Here you can find information about this app.',
-                style: TextStyle(fontSize: 18, color: Colors.black87),
+                style: TextStyle(fontSize: 18,),
               ),
-              SizedBox(height: 20),
-              Text(
-                'The Doctor is in App is an application that connects you to a health professional for any sort of health problem.',
-                style: TextStyle(fontSize: 16, color: Colors.black54),
+              const SizedBox(height: 20),
+              const Text(
+                'The Doctor is in App is an application that connects you to a health professional for any sort of health concern.',
+                style: TextStyle(fontSize: 16),
               ),
-              SizedBox(height: 10),
-              Text(
+              const SizedBox(height: 10),
+              const Text(
                 'We are here to support you in any ways that we can. If you need to just talk to someone, use our chat feature to chat with someone.',
-                style: TextStyle(fontSize: 16, color: Colors.black54),
+                style: TextStyle(fontSize: 16),
               ),
-              SizedBox(height: 20),
-              Divider(color: Colors.grey),
-              SizedBox(height: 10),
-              Text(
+              const SizedBox(height: 20),
+              Divider(color: Colors.black),
+              const SizedBox(height: 10),
+              const Text(
                 'FAQs (Frequently Asked Questions):',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blueAccent,
                 ),
               ),
-              SizedBox(height: 10),
-              Row(
-                children: [
-                  Icon(Icons.help_outline, color: Colors.blueAccent),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      'Account setup and login issues',
-                      style: TextStyle(fontSize: 16, color: Colors.black87),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 5),
-              Row(
-                children: [
-                  Icon(Icons.payment, color: Colors.blueAccent),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      'Payment or subscription-related questions',
-                      style: TextStyle(fontSize: 16, color: Colors.black87),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 5),
-              Row(
-                children: [
-                  Icon(Icons.bug_report, color: Colors.blueAccent),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      'Troubleshooting steps for common bugs',
-                      style: TextStyle(fontSize: 16, color: Colors.black87),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 5),
-              Row(
-                children: [
-                  Icon(Icons.info_outline, color: Colors.blueAccent),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      'How-to-guides for app features',
-                      style: TextStyle(fontSize: 16, color: Colors.black87),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20),
-              Divider(color: Colors.grey),
-              SizedBox(height: 10),
-              Text(
+              const SizedBox(height: 10),
+              faqItem(Icons.help_outline, 'Account setup and login issues'),
+              faqItem(Icons.payment, 'Payment or subscription-related questions'),
+              faqItem(Icons.bug_report, 'Troubleshooting steps for common bugs'),
+              faqItem(Icons.info_outline, 'How-to-guides for app features'),
+              const SizedBox(height: 20),
+              Divider(color: Colors.black),
+              const SizedBox(height: 10),
+              const Text(
                 'Contact Support:',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blueAccent,
                 ),
               ),
-              SizedBox(height: 10),
-              Row(
-                children: [
-                  Icon(Icons.email, color: Colors.blueAccent),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      'Email support: info@ekidspower.com',
-                      style: TextStyle(fontSize: 16, color: Colors.black87),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 10),
-              Row(
-                children: [
-                  Icon(Icons.phone, color: Colors.blueAccent),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      'Phone support: 1-415-378-6789',
-                      style: TextStyle(fontSize: 16, color: Colors.black87),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20),
-              Divider(color: Colors.grey),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
+              contactItem(Icons.email, 'Email support: info@ekidspower.com'),
+              contactItem(Icons.phone, 'Phone support: 1-415-378-6789'),
+              const SizedBox(height: 20),
+              Divider(color: Colors.black),
+              const SizedBox(height: 10),
               Center(
                 child: GestureDetector(
-                  onTap: () {
-                    // Redirect to the website
-                    launchUrl(Uri.parse('https://www.ekidspowerup.com/'));
+                  onTap: () async {
+                    final Uri url = Uri.parse('https://www.ekidspowerup.com/');
+                    if (!await launchUrl(url)) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Could not launch URL')),
+                      );
+                    }
                   },
-                  child: Text(
-                    'For further information, visit our website!',
+                  child: const Text(
+                    'For further information, visit our website by clicking here!',
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.blue,
                       decoration: TextDecoration.underline,
                     ),
                   ),
@@ -192,6 +126,43 @@ class HelpPage extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: const CustomBottomNavBar(),
     );
   }
+}
+
+Widget faqItem(IconData icon, String text) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 8.0),
+    child: Row(
+      children: [
+        Icon(icon),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Text(
+            text,
+            style: const TextStyle(fontSize: 16),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget contactItem(IconData icon, String text) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 8.0),
+    child: Row(
+      children: [
+        Icon(icon),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Text(
+            text,
+            style: const TextStyle(fontSize: 16),
+          ),
+        ),
+      ],
+    ),
+  );
 }
