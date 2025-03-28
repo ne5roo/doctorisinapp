@@ -11,7 +11,7 @@ class FeedbackPage extends StatefulWidget {
 class _FeedbackPageState extends State<FeedbackPage> {
   final _formKey = GlobalKey<FormState>();
   final _feedbackController = TextEditingController();
-  double _rating = 3.0;
+  double _rating = 0.0; // Changed default rating to 0.0
 
   // Function to handle feedback submission
   void _submitFeedback() {
@@ -24,7 +24,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
       // Optionally, you can clear the fields after submission
       _feedbackController.clear();
       setState(() {
-        _rating = 3.0; // Reset the rating
+        _rating = 0.0; // Reset the rating
       });
 
       // Navigate back to MainPage
@@ -40,7 +40,14 @@ class _FeedbackPageState extends State<FeedbackPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Feedback'),
+        title: const Text(
+          'Feedback',
+          style: TextStyle(
+            fontFamily: 'ComicSansMS', // Set the font family
+            fontWeight: FontWeight.bold, // Set the font weight
+            fontSize: 24, // Set the font size
+          ),
+        ),
         centerTitle: true, // Center the AppBar title
         automaticallyImplyLeading: false, // Remove the back button
       ),
@@ -65,6 +72,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                   controller: _feedbackController,
                   maxLines: 5,
                   decoration: InputDecoration(
+                    alignLabelWithHint: true, // Align the label text to the upper left
                     labelText: 'Put your Feedback Here....',
                     border: OutlineInputBorder(),
                   ),
